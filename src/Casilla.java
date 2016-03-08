@@ -13,7 +13,7 @@ public class Casilla {
 			}
 	
 	public int CalcularMinasCerca(){
-		
+		return 0;
 	}
 	
 	public boolean esMina() {
