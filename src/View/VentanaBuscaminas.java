@@ -16,6 +16,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class VentanaBuscaminas extends JFrame {
 
+	/**
+	 * Generated serial version ID
+	 */
+	private static final long serialVersionUID = 3350085996919535125L;
 	private JPanel contentPaneVentana;
 	private JPanel panelInformacion;
 	private JPanel panelCasillas;
@@ -99,6 +103,7 @@ public class VentanaBuscaminas extends JFrame {
 		}
 		return panelCasillas;
 	}
+	
 	private JButton getBtnCasilla(int i, int j) {
 		return new JButton(String.valueOf(i)+String.valueOf(j));
 	}
