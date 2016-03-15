@@ -26,6 +26,7 @@ public class VentanaBuscaminas extends JFrame {
 	private JLabel lblTiempo;
 	private JButton btnReiniciar;
 	private JLabel lblPuntuacin;
+	private JButton[][] btnVentana;
 
 	/**
 	 * Launch the application.
@@ -96,23 +97,16 @@ public class VentanaBuscaminas extends JFrame {
 			panelCasillas.setLayout(new GridLayout(10, 7, -5, -6));
 			for(int i=0; i<7; i++){
 				for(int j=0; j<10; j++){
-					panelCasillas.add(getBtnCasilla(i, j));
+					btnVentana = new JButton[7][10];
+					btnVentana[i][j] = new JButton();
+					panelCasillas.add(btnVentana[i][j]);
 				}
 			}
 		}
 		return panelCasillas;
 	}
+
 	
-	/**
-	 * Conseguimos identificar la posicion de las casillas matricialmente
-	 * 
-	 * @param i valor "i" en la matriz que se crea
-	 * @param j valor "j" en la matriz que se crea
-	 * @return
-	 */
-	private JButton getBtnCasilla(int i, int j) {
-		return new JButton(String.valueOf(i)+String.valueOf(j));
-	}
 	private JLabel getLblTiempo() {
 		if (lblTiempo == null) {
 			lblTiempo = new JLabel("Tiempo:");
