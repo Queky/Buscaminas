@@ -8,7 +8,7 @@ public class Juego {
 		// TODO Auto-generated method stub
 
 	CampoCasilla Tablero=  CampoCasilla.getcampoCasillas();
-	Tablero.inicializar(7, 10);
+	Tablero.inicializar(5,5);
 
 	Tablero.enseñarTablero();
 

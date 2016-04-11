@@ -67,10 +67,11 @@ public class SeleccionNivel extends JFrame implements Observer {
 			panelDatos = new JPanel();
 			panelDatos.setLayout(new MigLayout("", "[133px][][][][][][][grow]", "[16px][][][][][]"));
 			panelDatos.setLayout(new MigLayout("", "[1px][][][]", "[1px][][]"));
+			panelDatos.setLayout(new MigLayout("", "[1px]", "[1px]"));
 			panelDatos.add(getLblNombre(), "cell 0 0,grow");
-			panelDatos.add(getTextFieldNombre(), "cell 3 0,grow");
-			panelDatos.add(getLblNivel(), "cell 0 2,grow");
-			panelDatos.add(getComboBoxNivel(), "cell 3 2,grow");
+			panelDatos.add(getTextFieldNombre(), "cell 0 0,grow");
+			panelDatos.add(getLblNivel(), "cell 0 0,grow");
+			panelDatos.add(getComboBoxNivel(), "cell 0 0,grow");
 		}
 		return panelDatos;
 	}

@@ -12,7 +12,7 @@ public class CampoCasilla {
 	return MCAMPOCASILLAS;
 	}
 	
-	private CampoCasilla() {
+	public CampoCasilla() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -23,11 +23,11 @@ public class CampoCasilla {
 		caCasillas = new Casilla[ancho][alto];
 		bombasTotales = (alto+ancho)/2;
 		interrrogacionesTotales =0;
-		RellenarTablero();
+		//RellenarTablero(); // lo Comento para hacer una prueba 
 		
 	}
 	
-	//Rellena el tablero de casillas sin bombas, despues llama a introducir bombas para rellenarlo y a clacular minas cerca
+	//Rellena el tablero de casillas sin bombas, despues llama a introducir bombas para rellenarlo y a calcular minas cerca
 	public void RellenarTablero(){
 		for (int i = 0; i < caCasillas.length; i++) {
 			for (int j = 0; j < caCasillas[i].length; j++) {

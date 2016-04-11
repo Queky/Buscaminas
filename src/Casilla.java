@@ -15,13 +15,12 @@ public class Casilla {
 	
 	}
 	
-<<<<<<< HEAD
 	public int CalcularMinasCerca(){
 		return 0;
-=======
+	}
+
 	public Casilla() {
 		
->>>>>>> refs/remotes/origin/markel
 	}
 	
 	public boolean isVisible() {

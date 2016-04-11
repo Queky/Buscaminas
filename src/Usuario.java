@@ -6,10 +6,12 @@ public class Usuario {
 	private int puntuacionMaxima;
 	private CampoCasilla ultimoTablero;
 	
-	public Usuario(String nombre, String pass, int puntuacionMaxima, CampoCasilla ultimoTablero) {
-
+	public Usuario(String nombre, String pass, int puntuacionMaxima) {
+		// , CampoCasilla ultimoTablero esto va arriba no sabia como tratarlo
 		this.nombre = nombre;
 		this.pass = pass;
+		//Añadi la puntuacion Maxima no estaba puesta
+		this.puntuacionMaxima=puntuacionMaxima;
 	
 	}
 	public String getNombre() {
