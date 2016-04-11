@@ -7,18 +7,25 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.Closeable;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import Controller.Buscaminas;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class SeleccionNivel extends JDialog {
+public class SeleccionNivel extends JDialog{
 
 	/**
 	 * 
@@ -26,13 +33,17 @@ public class SeleccionNivel extends JDialog {
 	private static final long serialVersionUID = 953446088960038024L;
 	private final JPanel panelDatos = new JPanel();
 	private JTextField textFieldNombre;
+	private static Buscaminas buscaminas = Buscaminas.getBuscaminas();
+	private String selectedLevel;
+	private JComboBox comboBoxNivel;
+	private static SeleccionNivel dialog;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			SeleccionNivel dialog = new SeleccionNivel();
+			dialog = new SeleccionNivel();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -63,7 +74,7 @@ public class SeleccionNivel extends JDialog {
 			panelDatos.add(lblNivel, "cell 0 3");
 		}
 		{
-			JComboBox comboBoxNivel = new JComboBox();
+			comboBoxNivel = new JComboBox();
 			comboBoxNivel.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
 			panelDatos.add(comboBoxNivel, "cell 2 3,growx");
 		}
@@ -76,13 +87,30 @@ public class SeleccionNivel extends JDialog {
 				okButton.setActionCommand("Aceptar");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
+				okButton.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent pE) {
+						// TODO Auto-generated method stub
+						selectedLevel=comboBoxNivel.getSelectedItem().toString();
+						buscaminas.seleccionNivel(selectedLevel);
+						dialog.setVisible(false);
+					}
+				});
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setActionCommand("Cancelar");
 				buttonPane.add(cancelButton);
+				cancelButton.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent pE) {
+						// TODO Auto-generated method stub
+						dialog.dispose();
+					}
+				});
 			}
 		}
 	}
-
 }

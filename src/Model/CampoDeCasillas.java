@@ -8,7 +8,8 @@ public class CampoDeCasillas {
 
 	
 	public CampoDeCasillas(String dificultad) {
-	
+		//Hacer ENUM
+		//Patron FACTORY
 		if (dificultad.equals("facil")) {
 			CampoCasillas=new Casilla[5][5]; 					
 		}

@@ -27,6 +27,7 @@ public class VentanaBuscaminas extends JFrame {
 	private JButton btnReiniciar;
 	private JLabel lblPuntuacin;
 	private JButton[][] btnVentana;
+	private int nivelElegido;
 
 	/**
 	 * Launch the application.
@@ -48,19 +49,41 @@ public class VentanaBuscaminas extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaBuscaminas() {
+		// Contructor vacio para poder modificar primero las variables del tamaño
+		//initialize();
+	}
+	
+	public void inicializarVentana(){
 		initialize();
 	}
+	
 	private void initialize() {
 		setTitle("Buscaminas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 390, 510);
-		setMinimumSize(new Dimension(390, 510));
+		int x, y;
+		if(nivelElegido==1){
+			x=390;
+			y=510;
+		}else if(nivelElegido==2){
+			x=420;
+			y=540;
+		}else{
+			x=450;
+			y=900;
+		}
+		setBounds(100, 100, x, y);
+		setMinimumSize(new Dimension(x, y));
 		contentPaneVentana = new JPanel();
 		contentPaneVentana.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPaneVentana);
 		contentPaneVentana.setLayout(new BorderLayout(0, 0));
 		contentPaneVentana.add(getPanelInformacion(), BorderLayout.NORTH);
 		contentPaneVentana.add(getPanelCasillas(), BorderLayout.CENTER);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		setLocationRelativeTo(null);
+		//pack();
 	}
 
 	private JPanel getPanelInformacion() {
@@ -94,10 +117,21 @@ public class VentanaBuscaminas extends JFrame {
 	private JPanel getPanelCasillas() {
 		if (panelCasillas == null) {
 			panelCasillas = new JPanel();
-			panelCasillas.setLayout(new GridLayout(10, 7, -5, -6));
-			for(int i=0; i<7; i++){
-				for(int j=0; j<10; j++){
-					btnVentana = new JButton[7][10];
+			int x, y;
+			if(nivelElegido==1){
+				x=10;
+				y=7;
+			}else if(nivelElegido==2){
+				x=15;
+				y=10;
+			}else{
+				x=25;
+				y=12;
+			}
+			panelCasillas.setLayout(new GridLayout(x, y, -5, -5));
+			btnVentana = new JButton[y][x];
+			for(int i=0; i<y; i++){
+				for(int j=0; j<x; j++){
 					btnVentana[i][j] = new JButton();
 					panelCasillas.add(btnVentana[i][j]);
 				}
@@ -124,5 +158,9 @@ public class VentanaBuscaminas extends JFrame {
 			lblPuntuacin = new JLabel("Puntuación:");
 		}
 		return lblPuntuacin;
+	}
+	
+	public void setNivelElegido(int pNivel){
+		nivelElegido = pNivel;
 	}
 }
