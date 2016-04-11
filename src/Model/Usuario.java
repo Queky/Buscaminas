@@ -3,8 +3,9 @@ package Model;
 public class Usuario {
 	
 	private String nombre;
-<<<<<<< HEAD
 	private String password;
+	private int puntuacionMaxima;
+	private CampoCasilla ultimoTablero;
 	private boolean userLoaded;
 	
 	private static Usuario mUsuario;
@@ -15,12 +16,16 @@ public class Usuario {
 			checkUserLoaded();
 		}
 	}
+	
+	public Usuario(String name, String pass, int puntuacion){
+		
+	}
 
 	public static Usuario getUsuario() {
 		return mUsuario;
 	}
 	
-	public void setUsuario(String pNombre){
+	public void setNombre(String pNombre){
 		nombre = pNombre;
 		checkUserLoaded();
 	}
@@ -47,31 +52,8 @@ public class Usuario {
 	
 	public boolean getUserLoaded(){
 		return userLoaded;
-=======
-	private String pass;
-	private int puntuacionMaxima;
-	private CampoCasilla ultimoTablero;
-	
-	public Usuario(String nombre, String pass, int puntuacionMaxima) {
-		// , CampoCasilla ultimoTablero esto va arriba no sabia como tratarlo
-		this.nombre = nombre;
-		this.pass = pass;
-		//Añadi la puntuacion Maxima no estaba puesta
-		this.puntuacionMaxima=puntuacionMaxima;
-	
 	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getPass() {
-		return pass;
-	}
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
+
 	public int getPuntuacionMaxima() {
 		return puntuacionMaxima;
 	}
@@ -83,7 +65,6 @@ public class Usuario {
 	}
 	public void setUltimoTablero(CampoCasilla ultimoTablero) {
 		this.ultimoTablero = ultimoTablero;
->>>>>>> Raul
 	}
 
 }

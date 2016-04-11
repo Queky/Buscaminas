@@ -4,7 +4,6 @@ package Test;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import Model.Usuario;
@@ -33,13 +32,13 @@ public class UsuarioTest {
 
 	@Test
 	public void testGetPass() {
-		assertEquals("Llano", S.getPass());
+		assertEquals("Llano", S.getPassword());
 	}
 
 	@Test
 	public void testSetPass() {
-		S.setPass("perez");
-		assertEquals("perez", S.getPass());
+		S.setPassword("perez");
+		assertEquals("perez", S.getPassword());
 	}
 
 	@Test
