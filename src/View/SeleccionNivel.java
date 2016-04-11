@@ -55,6 +55,7 @@ public class SeleccionNivel extends JDialog{
 	 * Create the dialog.
 	 */
 	public SeleccionNivel() {
+<<<<<<< HEAD
 		setBounds(100, 100, 310, 160);
 		getContentPane().setLayout(new BorderLayout());
 		panelDatos.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,6 +64,37 @@ public class SeleccionNivel extends JDialog{
 		{
 			JLabel lblNombre = new JLabel("Introduce tu nombre:");
 			panelDatos.add(lblNombre, "cell 0 0");
+=======
+		initialize();
+	}
+	private void initialize() {
+		setTitle("Elige un nivel");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 349, 160);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.add(getPanelDatos(), BorderLayout.CENTER);
+		contentPane.add(getBtnAceptar(), BorderLayout.SOUTH);
+	}
+	private JPanel getPanelDatos() {
+		if (panelDatos == null) {
+			panelDatos = new JPanel();
+			panelDatos.setLayout(new MigLayout("", "[133px][][][][][][][grow]", "[16px][][][][][]"));
+			panelDatos.setLayout(new MigLayout("", "[1px][][][]", "[1px][][]"));
+			panelDatos.setLayout(new MigLayout("", "[1px]", "[1px]"));
+			panelDatos.add(getLblNombre(), "cell 0 0,grow");
+			panelDatos.add(getTextFieldNombre(), "cell 0 0,grow");
+			panelDatos.add(getLblNivel(), "cell 0 0,grow");
+			panelDatos.add(getComboBoxNivel(), "cell 0 0,grow");
+		}
+		return panelDatos;
+	}
+	private JLabel getLblNombre() {
+		if (lblNombre == null) {
+			lblNombre = new JLabel("Introduce tu nombre:");
+>>>>>>> Raul
 		}
 		{
 			textFieldNombre = new JTextField();
