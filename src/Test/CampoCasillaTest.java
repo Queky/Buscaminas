@@ -1,9 +1,13 @@
+package Test;
 
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Model.CampoCasilla;
+import Model.Casilla;
 
 public class CampoCasillaTest {
 	CampoCasilla S,B,C;	

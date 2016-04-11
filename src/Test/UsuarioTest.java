@@ -1,9 +1,13 @@
+package Test;
+
 
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Model.Usuario;
 
 public class UsuarioTest {
 	Usuario S = new Usuario("Raul", "Llano", 800);
