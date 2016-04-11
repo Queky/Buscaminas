@@ -9,7 +9,9 @@ public class Usuario {
 	private boolean userLoaded;
 	
 	private static Usuario mUsuario;
-
+	
+	// Hay que usar este constructo y construir el Usuario desde los setters
+	@SuppressWarnings("unused")
 	private Usuario() {
 		if(mUsuario==null){
 			mUsuario = new Usuario();

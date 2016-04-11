@@ -80,7 +80,7 @@ public class CampoDeCasillas {
 	public void CalcularMinasCerca(){
 		for (int i = 0; i < CampoCasillas.length; i++) {
 			for (int j = 0; j < CampoCasillas[i].length; j++) {
-				int MinasCerca =0;
+				int minasCerca =0;
 				CampoCasillas[i][j].setMinasCerca(CampoCasillas[i][j].CalcularMinasCerca());
 			}
 		}

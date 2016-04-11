@@ -25,7 +25,7 @@ public class SeleccionNivel extends JDialog{
 	private JTextField textFieldNombre;
 	private static Buscaminas buscaminas = Buscaminas.getBuscaminas();
 	private String selectedLevel;
-	private JComboBox comboBoxNivel;
+	private JComboBox<Object> comboBoxNivel;
 	private static SeleccionNivel dialog;
 
 	/**
@@ -64,8 +64,8 @@ public class SeleccionNivel extends JDialog{
 			panelDatos.add(lblNivel, "cell 0 3");
 		}
 		{
-			comboBoxNivel = new JComboBox();
-			comboBoxNivel.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
+			comboBoxNivel = new JComboBox<Object>();
+			comboBoxNivel.setModel(new DefaultComboBoxModel<Object>(new String[] {"1", "2", "3"}));
 			panelDatos.add(comboBoxNivel, "cell 2 3,growx");
 		}
 		{

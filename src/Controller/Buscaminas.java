@@ -2,18 +2,19 @@ package Controller;
 
 import java.util.Observable;
 
-import View.SeleccionNivel;
 import View.VentanaBuscaminas;
 
 public class Buscaminas extends Observable{
 	
 	// Atributo que contiene la unica instancia de la clase
-	private static Buscaminas mBuscaminas = new Buscaminas();
+	private static Buscaminas mBuscaminas;
 	private VentanaBuscaminas ventanaBuscaminas;
 	
 	
 	private Buscaminas() {
-		// TODO Completar el cuerpo del constructor
+		if(mBuscaminas==null){
+			mBuscaminas = new Buscaminas();
+		}
 	}
 
 	public static Buscaminas getBuscaminas() {

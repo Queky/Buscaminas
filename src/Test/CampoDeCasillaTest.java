@@ -14,8 +14,8 @@ public class CampoDeCasillaTest {
 	CampoDeCasillas M = new CampoDeCasillas("facil");
 	
 	private Casilla[][] testCasillasFacil = new Casilla[5][5];
-	private Casilla[][] testCasillasMedio = new Casilla[10][10];
-	private Casilla[][] testCasillasDificil = new Casilla[20][20];
+	//private Casilla[][] testCasillasMedio = new Casilla[10][10];
+	//private Casilla[][] testCasillasDificil = new Casilla[20][20];
 	@Before
 	public void setUp() throws Exception {
 		S = new CampoDeCasillas(5,5);
