@@ -9,14 +9,7 @@ import org.junit.Test;
 import Model.Usuario;
 
 public class UsuarioTest {
-	Usuario S = new Usuario("Raul", "Llano", 800);
-	
-	
-
-	@Test
-	public void testUsuario() {
-		assertNotNull(new Usuario("Iñaki", "Sanchez", 500));
-	}
+	Usuario S = new Usuario("Raul");
 
 	@Test
 	public void testGetNombre() {
@@ -28,17 +21,6 @@ public class UsuarioTest {
 	public void testSetNombre() {
 		S.setNombre("Javi");
 		assertEquals("Javi", S.getNombre());
-	}
-
-	@Test
-	public void testGetPass() {
-		assertEquals("Llano", S.getPassword());
-	}
-
-	@Test
-	public void testSetPass() {
-		S.setPassword("perez");
-		assertEquals("perez", S.getPassword());
 	}
 
 	@Test

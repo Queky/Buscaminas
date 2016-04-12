@@ -3,15 +3,12 @@ package Model;
 public class Usuario {
 	
 	private String nombre;
-	private String password;
 	private int puntuacionMaxima;
 	private CampoCasilla ultimoTablero;
 	private boolean userLoaded;
 	
-	private static Usuario mUsuario;
+	private static Usuario mUsuario = new Usuario();
 	
-	// Hay que usar este constructo y construir el Usuario desde los setters
-	@SuppressWarnings("unused")
 	private Usuario() {
 		if(mUsuario==null){
 			mUsuario = new Usuario();
@@ -19,8 +16,8 @@ public class Usuario {
 		}
 	}
 	
-	public Usuario(String name, String pass, int puntuacion){
-		
+	public Usuario(String name){
+		nombre = name;
 	}
 
 	public static Usuario getUsuario() {
@@ -36,17 +33,8 @@ public class Usuario {
 		return nombre;
 	}
 	
-	public void setPassword(String pPassword){
-		password = pPassword;
-		checkUserLoaded();
-	}
-	
-	public String getPassword(){
-		return password;
-	}
-	
 	private void checkUserLoaded(){
-		if(nombre!=null && password!=null)
+		if(nombre!=null)
 			userLoaded = true;
 		else
 			userLoaded = false;
