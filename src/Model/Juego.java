@@ -1,4 +1,7 @@
 package Model;
+
+import Pruebas.CampoDeCasillas;
+
 /**
  * 
  * @author inakisanchez

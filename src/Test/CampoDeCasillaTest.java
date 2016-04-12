@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import Model.CampoDeCasillas;
 import Model.Casilla;
+import Pruebas.CampoDeCasillas;
 
 public class CampoDeCasillaTest {
 	CampoDeCasillas S,B,C;	

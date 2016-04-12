@@ -1,3 +1,4 @@
+package Pruebas;
 import Model.CampoCasilla;
 
 public class Juego {
