@@ -1,4 +1,6 @@
-package Model;
+package Pruebas;
+
+import Model.Casilla;
 
 public class CampoDeCasillas {
 	private Casilla[][] CampoCasillas;
