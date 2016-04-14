@@ -106,7 +106,8 @@ public class MenuUsuario extends JFrame {
 	
 	/*
 	 * Implementar un ActionListener para mostrar una pantalla con las indicaciones
-	 * y un boton "Atras" para volver al menu del usuario.
+	 * y un boton "Atras" para volver al menu del usuario. Hacerlo dentro de un 
+	 * JDialog. Dentro del juego habra OTRO DIFERENTE.
 	 */
 	private JButton getBtnAyuda() {
 		if (btnAyuda == null) {

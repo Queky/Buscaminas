@@ -7,6 +7,10 @@ public class Usuario {
 	private CampoCasilla ultimoTablero;
 	private boolean userLoaded;
 	
+	// Tiempo del usuario.
+	int min;
+	int seg;
+	
 	private static Usuario mUsuario = new Usuario();
 	
 	private Usuario() {
@@ -56,5 +60,4 @@ public class Usuario {
 	public void setUltimoTablero(CampoCasilla ultimoTablero) {
 		this.ultimoTablero = ultimoTablero;
 	}
-
 }
