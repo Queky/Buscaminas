@@ -97,6 +97,7 @@ public class SeleccionNivel extends JDialog{
 					@Override
 					public void actionPerformed(ActionEvent pE) {
 						// TODO Auto-generated method stub
+						// TODO Hay que hacer que vuelva al menu de inicio
 						dialog.dispose();
 					}
 				});
