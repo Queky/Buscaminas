@@ -50,7 +50,7 @@ public class VentanaBuscaminas extends JFrame {
 	 */
 	public VentanaBuscaminas() {
 		// Contructor vacio para poder modificar primero las variables del tamaño
-		//initialize();
+		// initialize();
 	}
 	
 	public void inicializarVentana(){

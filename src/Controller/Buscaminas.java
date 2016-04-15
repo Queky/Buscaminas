@@ -7,14 +7,12 @@ import View.VentanaBuscaminas;
 public class Buscaminas extends Observable{
 	
 	// Atributo que contiene la unica instancia de la clase
-	private static Buscaminas mBuscaminas;
+	private static Buscaminas mBuscaminas = new Buscaminas();
 	private VentanaBuscaminas ventanaBuscaminas;
 	
 	
 	private Buscaminas() {
-		if(mBuscaminas==null){
-			mBuscaminas = new Buscaminas();
-		}
+
 	}
 
 	public static Buscaminas getBuscaminas() {
