@@ -31,6 +31,8 @@ public class CasillaTest {
 		fail("Not yet implemented");
 	}*/
 
+	
+	/** Hay que arreglarlo, metodos nuevos
 	@Test
 	public void testIsVisible() {
 		
@@ -65,6 +67,7 @@ public class CasillaTest {
 		D.setTieneMina(true);
 		
 	}*/
+	
 
 	/*@Test
 	public void testGetMinasCerca() {

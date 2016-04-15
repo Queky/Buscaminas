@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -50,6 +51,7 @@ public class MenuUsuario extends JFrame {
 		setTitle("Buscaminas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 470, 525);
+		setMinimumSize(new Dimension(470, 525));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -65,24 +67,24 @@ public class MenuUsuario extends JFrame {
 				gl_buttonPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_buttonPane.createSequentialGroup()
 						.addGap(171)
-						.addGroup(gl_buttonPane.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_buttonPane.createParallelGroup(Alignment.LEADING)
 							.addComponent(getBtnSalir(), Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(getBtnPuntuaciones(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(getBtnAyuda(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(getBtnNuevoJuego(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap(161, Short.MAX_VALUE))
+						.addGap(161))
 			);
 			gl_buttonPane.setVerticalGroup(
-				gl_buttonPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(Alignment.TRAILING, gl_buttonPane.createSequentialGroup()
-						.addContainerGap(248, Short.MAX_VALUE)
-						.addComponent(getBtnNuevoJuego())
+				gl_buttonPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addGap(248)
+						.addComponent(getBtnNuevoJuego(), GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
 						.addGap(18)
-						.addComponent(getBtnPuntuaciones())
+						.addComponent(getBtnPuntuaciones(), GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
 						.addGap(18)
-						.addComponent(getBtnAyuda())
+						.addComponent(getBtnAyuda(), GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
 						.addGap(18)
-						.addComponent(getBtnSalir())
+						.addComponent(getBtnSalir(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGap(75))
 			);
 			buttonPane.setLayout(gl_buttonPane);
@@ -101,6 +103,12 @@ public class MenuUsuario extends JFrame {
 		}
 		return btnPuntuaciones;
 	}
+	
+	/*
+	 * Implementar un ActionListener para mostrar una pantalla con las indicaciones
+	 * y un boton "Atras" para volver al menu del usuario. Hacerlo dentro de un 
+	 * JDialog. Dentro del juego habra OTRO DIFERENTE.
+	 */
 	private JButton getBtnAyuda() {
 		if (btnAyuda == null) {
 			btnAyuda = new JButton("Ayuda");

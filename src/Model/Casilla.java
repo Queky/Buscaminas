@@ -1,18 +1,30 @@
+
 package Model;
 
-public class Casilla {
+import java.util.Observable;
+
+public class Casilla extends Observable{
 	
 	private boolean TieneMina;
 	private int MinasCerca;
-	private boolean visible ;
-	private boolean interrogacion;
+	private State estado;
+
+	
+	public State getEstado() {
+		return estado;
+	}
+
+	private void setEstado(State estado) {
+		this.estado = estado;
+	}
+
 	
 	
 	public Casilla(boolean tieneMina) {
 	
 		TieneMina = tieneMina;
-		visible=false;
-		interrogacion=false;
+	
+		estado = new NoVisible();
 	
 	}
 	
@@ -24,18 +36,6 @@ public class Casilla {
 		
 	}
 	
-	public boolean isVisible() {
-		return visible;
-	}
-	public void setVisible(boolean visible) {
-		this.visible = visible;
-	}
-	public boolean isInterrogacion() {
-		return interrogacion;
-	}
-	public void setInterrogacion(boolean interrogacion) {
-		this.interrogacion = interrogacion;
-	}
 	public boolean esMina() {
 		return TieneMina;
 	}
@@ -49,6 +49,61 @@ public class Casilla {
 		MinasCerca = minasCerca;
 	}
 	
+	public class Bandera implements State{
+
+		@Override
+		public void botonDerecho() {
+			
+			setEstado( new NoVisible());
+			
+			
+			setChanged();
+			notifyObservers(estado);
+		}
+
+		@Override
+		public void botonIzquierdo() {
+			setEstado( new Visible());
+			
+			
+			setChanged();
+			notifyObservers(estado);
+			
+		}}
+	public class Visible implements State{
+
+		@Override
+		public void botonDerecho() {
+		
+			
+		}
+
+		@Override
+		public void botonIzquierdo() {
+			
+			
+		}}
+	public class NoVisible implements State{
+
+		@Override
+		public void botonDerecho() {
+			setEstado( new Bandera());
+			
+			
+			setChanged();
+			notifyObservers(estado);
+			
+		}
+
+		@Override
+		public void botonIzquierdo() {
+			setEstado( new Visible());
+			
+			
+			setChanged();
+			notifyObservers(estado);
+			
+		}}
 	
 
 }
