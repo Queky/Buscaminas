@@ -98,6 +98,15 @@ public class MenuUsuario extends JFrame {
 	private JButton getBtnNuevoJuego() {
 		if (btnNuevoJuego == null) {
 			btnNuevoJuego = new JButton("Nuevo juego");
+			btnNuevoJuego.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					SeleccionNivel prueba = new SeleccionNivel();
+					prueba.setVisible(true);
+					
+				}
+			});
 		}
 		return btnNuevoJuego;
 	}

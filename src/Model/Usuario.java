@@ -1,11 +1,18 @@
 package Model;
 
+import View.SeleccionNivel;
+
 public class Usuario {
 	
 	private String nombre;
 	private int puntuacionMaxima;
 	private CampoCasilla ultimoTablero;
 	private boolean userLoaded;
+	
+	SeleccionNivel e1 = new SeleccionNivel();
+	
+	
+	
 	
 	// Tiempo del usuario.
 	int min;
@@ -27,9 +34,12 @@ public class Usuario {
 	public static Usuario getUsuario() {
 		return mUsuario;
 	}
-	
+	//mirar..
+	public void setNombreUsuario(){
+		 nombre=e1.getNombreJugador();
+	}
 	public void setNombre(String pNombre){
-		nombre = pNombre;
+		nombre = pNombre ;
 		checkUserLoaded();
 	}
 	
