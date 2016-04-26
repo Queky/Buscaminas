@@ -3,7 +3,6 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import Model.Usuario;
@@ -48,11 +47,12 @@ public class WindowController implements ActionListener{
 			}
 			else {
 				VentanaBuscaminas ventBuscaminas = VentanaBuscaminas.getVentanaBuscaminas();
+				ventBuscaminas.setNivelElegido(selNivel.getSelectedLevel());
+				ventBuscaminas.inicializar();
 				selNivel.dispose();
 				Usuario user = Usuario.getUsuario();
 				System.out.println(selNivel.getSelectedLevel());
-				//user.setNivelElegido(selNivel.getSelectedLevel());
-				//ventBuscaminas.setNivelElegido(selNivel.getSelectedLevel());
+				user.setNivelElegido(selNivel.getSelectedLevel());
 				ventBuscaminas.setVisible(true);
 			}
 				

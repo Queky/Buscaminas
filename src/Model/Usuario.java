@@ -13,6 +13,7 @@ public class Usuario extends Observable{
 	private int puntuacionMaxima;
 	private CampoCasilla ultimoTablero;
 	private boolean userLoaded;
+	@SuppressWarnings("unused")
 	private int nivelElegido;
 	
 	SeleccionNivel selNivel = SeleccionNivel.getSeleccionNivel();

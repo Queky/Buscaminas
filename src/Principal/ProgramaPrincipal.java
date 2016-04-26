@@ -1,13 +1,9 @@
 package Principal;
 
-import Controller.Buscaminas;
 import Controller.WindowController;
-import Model.Tiempo;
 import Model.Usuario;
-import Pruebas.PruebaTiempo;
 import View.MenuUsuario;
 import View.SeleccionNivel;
-import View.VentanaBuscaminas;
 
 public class ProgramaPrincipal {
 		

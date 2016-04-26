@@ -57,6 +57,10 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	 * Create the frame.
 	 */
 	private VentanaBuscaminas() {
+		//initialize();
+	}
+	
+	public void inicializar(){
 		initialize();
 	}
 	
