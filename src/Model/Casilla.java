@@ -5,9 +5,11 @@ import java.util.Observable;
 
 public class Casilla extends Observable{
 	
-	private boolean TieneMina;
-	private int MinasCerca;
+	private boolean tieneMina;
+	private int minasCerca;
 	private State estado;
+	private int coordX;
+	private int coordY;
 
 	
 	public State getEstado() {
@@ -22,7 +24,16 @@ public class Casilla extends Observable{
 	
 	public Casilla(boolean tieneMina) {
 	
-		TieneMina = tieneMina;
+		this.tieneMina = tieneMina;
+	
+		estado = new NoVisible();
+	
+	}
+	public Casilla(boolean tieneMina, int i, int j) {
+		
+		this.tieneMina = tieneMina;
+		this.coordX=i;
+		this.coordY=j;
 	
 		estado = new NoVisible();
 	
@@ -36,20 +47,40 @@ public class Casilla extends Observable{
 		
 	}
 	
+	
+	
+	public int getCoordX() {
+		return coordX;
+	}
+
+	public void setCoordX(int coordX) {
+		this.coordX = coordX;
+	}
+
+	public int getCoordY() {
+		return coordY;
+	}
+
+	public void setCoordY(int coordY) {
+		this.coordY = coordY;
+	}
+
 	public boolean esMina() {
-		return TieneMina;
+		return tieneMina;
 	}
 	public void setTieneMina(boolean tieneMina) {
-		TieneMina = tieneMina;
+		this.tieneMina = tieneMina;
 	}
 	public int getMinasCerca() {
-		return MinasCerca;
+		return minasCerca;
 	}
 	public void setMinasCerca(int minasCerca) {
-		MinasCerca = minasCerca;
+		this.minasCerca = minasCerca;
 	}
 	
 	public class Bandera implements State{
+		
+		// de bandera: derecho a novisible, izquierdo a visible
 
 		@Override
 		public void botonDerecho() {
@@ -71,6 +102,8 @@ public class Casilla extends Observable{
 			
 		}}
 	public class Visible implements State{
+		
+		// visible no hace nada
 
 		@Override
 		public void botonDerecho() {
@@ -84,6 +117,8 @@ public class Casilla extends Observable{
 			
 		}}
 	public class NoVisible implements State{
+		
+		//Novisible; derecho a bandera; izquierda a Visible
 
 		@Override
 		public void botonDerecho() {
@@ -94,6 +129,8 @@ public class Casilla extends Observable{
 			notifyObservers(estado);
 			
 		}
+		
+		
 
 		@Override
 		public void botonIzquierdo() {

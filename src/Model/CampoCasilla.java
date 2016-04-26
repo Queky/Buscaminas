@@ -7,7 +7,6 @@ import java.util.Observer;
 
 public class CampoCasilla implements Observer {
 
-
 	private Casilla[][] caCasillas;
 	private int bombasTotales;
 	private int banderasTotales;
@@ -21,25 +20,25 @@ public class CampoCasilla implements Observer {
 
 	public CampoCasilla() {
 
-
 	}
+
 	// Recibe la altura y anchura del tablero, Despues llama a rellenar Tablero
 	public void inicializar(int alto, int ancho) {
 
 		caCasillas = new Casilla[ancho][alto];
 
-		bombasTotales = (alto+ancho)/2;
-		banderasTotales =0;
-		RellenarTablero(); // lo Comento para hacer una prueba 
-		
+		bombasTotales = (alto + ancho) / 2;
+		banderasTotales = 0;
+		RellenarTablero(); // lo Comento para hacer una prueba
+
 	}
-	
+
 	// Rellena el tablero de casillas sin bombas, despues llama a introducir
 	// bombas para rellenarlo y a clacular minas cerca
 	public void RellenarTablero() {
 		for (int i = 0; i < caCasillas.length; i++) {
 			for (int j = 0; j < caCasillas[i].length; j++) {
-				Casilla Casilla01 = new Casilla(false);
+				Casilla Casilla01 = new Casilla(false, i, j);
 				caCasillas[i][j] = Casilla01;
 			}
 		}
@@ -48,9 +47,6 @@ public class CampoCasilla implements Observer {
 		calcularMinasCerca();
 
 	}
-	
-	
-	
 
 	public void inicializar(String dificultad) {
 		int ancho = 0;
@@ -150,26 +146,31 @@ public class CampoCasilla implements Observer {
 	}
 
 	public void descubrirCasilla(int posx, int posy, boolean derecho, boolean izquierdo) {
-		
+
 		if (derecho) {
 			caCasillas[posx][posy].getEstado().botonDerecho();
 		}
 		if (izquierdo) {
 			caCasillas[posx][posy].getEstado().botonIzquierdo();
 		}
-	
+
 	}
 
 	public void descubrirCasillaExpansion(int posx, int posy) {
-		// tiene como precondicion que la casilla no tenga bombas y
-		// getMinasCerca sea 0, de todas formas lo vuelvo a comprobar
 
 		if (caCasillas[posx][posy].getMinasCerca() == 0 && caCasillas[posx][posy].esMina() == false) {
-			//caCasillas[posx][posy].setVisible(true);
 			for (int i = Math.max(0, posx - 1); i <= Math.min(posx + 1, caCasillas.length - 1); i++) {
 				for (int j = Math.max(0, posy - 1); j <= Math.min(posy + 1, caCasillas[i].length - 1); j++) {
 
-					descubrirCasillaExpansion(i, j);
+					if (caCasillas[i][j].esMina() == false) {
+						caCasillas[i][j].getEstado().botonIzquierdo();
+						
+						if (caCasillas[i][j].getMinasCerca() == 0) {
+							descubrirCasillaExpansion(i, j);
+
+						}
+
+					}
 				}
 			}
 
@@ -189,6 +190,11 @@ public class CampoCasilla implements Observer {
 			System.out.println("sigue jugando");
 		}
 
+	}
+
+	public void gameOver() {
+
+		System.out.println("GAME OVER NOOB");
 	}
 
 	public void enseñarTablero() {
@@ -248,15 +254,40 @@ public class CampoCasilla implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
-		
-		if (((State) arg).toString().equals("NoVisible") ) {
-			
+
+		Casilla casilla = (Casilla) o;
+
+		if (arg instanceof Casilla.Visible) {
+
+			if (casilla.esMina()) {
+				gameOver();
+			}
+			if (!casilla.esMina()) {
+				if (casilla.getMinasCerca() == 0) {
+					descubrirCasillaExpansion(casilla.getCoordX(), casilla.getCoordY());
+				}
+				if (casilla.getMinasCerca() != 0) {
+					System.out.println(casilla.getMinasCerca());
+				}
+
+			}
+
 		}
-	
-		
-		// TODO Auto-generated method stub
-		
+
+		if (arg instanceof Casilla.Bandera) {
+
+			banderasTotales++;
+
+		}
+
+		if (arg instanceof Casilla.NoVisible) {
+
+			banderasTotales--;
+
+		}
+
+		comprobarjuego();
+
 	}
 
 }
