@@ -27,6 +27,7 @@ public class SeleccionNivel extends JDialog{
 	private String selectedLevel;
 	private JComboBox<Object> comboBoxNivel;
 	private static SeleccionNivel dialog;
+	
 
 	/**
 	 * Launch the application.
@@ -54,11 +55,14 @@ public class SeleccionNivel extends JDialog{
 			JLabel lblNombre = new JLabel("Introduce tu nombre:");
 			panelDatos.add(lblNombre, "cell 0 0");
 		}
+		
 		{
 			textFieldNombre = new JTextField();
 			panelDatos.add(textFieldNombre, "cell 2 0,growx");
 			textFieldNombre.setColumns(10);
 		}
+		
+		
 		{
 			JLabel lblNivel = new JLabel("Selecciona un nivel:");
 			panelDatos.add(lblNivel, "cell 0 3");
@@ -104,4 +108,7 @@ public class SeleccionNivel extends JDialog{
 			}
 		}
 	}
+	public String getNombreJugador(){
+		return textFieldNombre.getText() ;
+		} 
 }

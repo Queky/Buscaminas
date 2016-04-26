@@ -6,8 +6,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,6 +26,8 @@ public class MenuUsuario extends JFrame {
 	private JButton btnPuntuaciones;
 	private JButton btnAyuda;
 	private JButton btnSalir;
+	private JTextPane panelAyuda;
+	
 
 	/**
 	 * Launch the application.
@@ -94,6 +98,15 @@ public class MenuUsuario extends JFrame {
 	private JButton getBtnNuevoJuego() {
 		if (btnNuevoJuego == null) {
 			btnNuevoJuego = new JButton("Nuevo juego");
+			btnNuevoJuego.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					SeleccionNivel prueba = new SeleccionNivel();
+					prueba.setVisible(true);
+					
+				}
+			});
 		}
 		return btnNuevoJuego;
 	}
@@ -112,8 +125,31 @@ public class MenuUsuario extends JFrame {
 	private JButton getBtnAyuda() {
 		if (btnAyuda == null) {
 			btnAyuda = new JButton("Ayuda");
+			btnAyuda.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					if(btnAyuda.isEnabled()){
+						JDialog prueba = new JDialog();
+						prueba.setVisible(true);
+						prueba.setSize(300, 300);
+						prueba.setTitle("Ayuda");
+						prueba.getContentPane().add(getTxtpnelJuegoConsiste(), BorderLayout.CENTER);
+				
+					}
+				}
+				
+			});
 		}
 		return btnAyuda;
+	}
+	private JTextPane getTxtpnelJuegoConsiste() {
+		if (panelAyuda == null) {
+			panelAyuda = new JTextPane();
+			panelAyuda.setEditable(false);
+			panelAyuda.setText("1.-El juego consiste en despejar todas las casillas de una pantalla que no oculten una mina.\r\n2.-Algunas casillas tienen un número, el cual indica la cantidad de minas que hay en las casillas circundantes. \r\n3.-Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene mina y éstas se descubren automáticamente.\r\n4.-Si se descubre una casilla con una mina se pierde la partida.\r\n");
+		}
+		return panelAyuda;
 	}
 	private JButton getBtnSalir() {
 		if (btnSalir == null) {
