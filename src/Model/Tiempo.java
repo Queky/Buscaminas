@@ -1,17 +1,16 @@
-package Pruebas;
+package Model;
 
-import java.time.*;
+import java.time.LocalDateTime;
+import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PruebaTiempo {
-	
+public class Tiempo extends Observable{
 	private int tiempoTotalSeg;
 	private String tiempo = "";
 	private boolean reiniciar;
 	
-	public PruebaTiempo() {
-		
+	public Tiempo() {
 		Timer timer = new Timer();
 		
 		timer.scheduleAtFixedRate(new TimerTask() {
@@ -19,7 +18,6 @@ public class PruebaTiempo {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				
 				
 				int actualS = LocalDateTime.now().getSecond();
 				int postS = LocalDateTime.now().getSecond() + 1;
@@ -76,8 +74,6 @@ public class PruebaTiempo {
 				
 			}
 		}, 999, 999);
-		
-		tiempo();
 	}
 	
 	private void tiempo() {
@@ -126,6 +122,7 @@ public class PruebaTiempo {
 				actualizar = true;
 				
 				if(actualizar){
+					notifyObservers(tiempo);
 					System.out.println(tiempo);
 					actualizar = false;
 					tiempo = "";
@@ -147,13 +144,4 @@ public class PruebaTiempo {
 	public int getTiempoSeg(){
 		return tiempoTotalSeg; 
 	}
-	
-	public String getTiempoString(){
-		return tiempo;
-	}
-	
-	public static void main(String[] args) {
-		PruebaTiempo r = new PruebaTiempo();
-	}
-
 }

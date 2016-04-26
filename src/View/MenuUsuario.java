@@ -8,18 +8,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
+
+import Controller.WindowController;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-public class MenuUsuario extends JFrame {
+public class MenuUsuario extends JFrame implements Observer{
 
 	private static final long serialVersionUID = -44238291382720269L;
-	private static MenuUsuario frame;
+	private static MenuUsuario frame = new MenuUsuario();
 	private JPanel contentPane;
 	private JPanel buttonPane;
 	private JButton btnNuevoJuego;
@@ -36,9 +41,10 @@ public class MenuUsuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new MenuUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
+						frame = new MenuUsuario();
+						frame.setVisible(true);
+					}
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -48,9 +54,14 @@ public class MenuUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuUsuario() {
+	private MenuUsuario() {
 		initialize();
 	}
+	
+	public static MenuUsuario getMenuUsuario(){
+		return frame;
+	}
+	
 	private void initialize() {
 		setTitle("Buscaminas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,6 +72,8 @@ public class MenuUsuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.add(getButtonPane(), BorderLayout.CENTER);
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 
 	private JPanel getButtonPane() {
@@ -98,6 +111,7 @@ public class MenuUsuario extends JFrame {
 	private JButton getBtnNuevoJuego() {
 		if (btnNuevoJuego == null) {
 			btnNuevoJuego = new JButton("Nuevo juego");
+			/*
 			btnNuevoJuego.addActionListener(new ActionListener() {
 				
 				@Override
@@ -106,7 +120,7 @@ public class MenuUsuario extends JFrame {
 					prueba.setVisible(true);
 					
 				}
-			});
+			});*/
 		}
 		return btnNuevoJuego;
 	}
@@ -125,6 +139,7 @@ public class MenuUsuario extends JFrame {
 	private JButton getBtnAyuda() {
 		if (btnAyuda == null) {
 			btnAyuda = new JButton("Ayuda");
+			/*
 			btnAyuda.addActionListener(new ActionListener(){
 
 				@Override
@@ -140,6 +155,7 @@ public class MenuUsuario extends JFrame {
 				}
 				
 			});
+			*/
 		}
 		return btnAyuda;
 	}
@@ -158,11 +174,24 @@ public class MenuUsuario extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent pE) {
-					if(btnSalir.isEnabled())
-						frame.dispose();
+					// TODO Auto-generated method stub
+					frame.dispose();
 				}
 			});
 		}
 		return btnSalir;
+	}
+	
+	public void addController(ActionListener windowController){
+		getBtnNuevoJuego().addActionListener(windowController);
+		getBtnPuntuaciones().addActionListener(windowController);
+		getBtnAyuda().addActionListener(windowController);
+		getBtnSalir().addActionListener(windowController);;
+	}
+
+	@Override
+	public void update(Observable pO, Object pArg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

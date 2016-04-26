@@ -1,30 +1,27 @@
 package Model;
 
+import java.util.Observable;
+
 import View.SeleccionNivel;
 
-public class Usuario {
+public class Usuario extends Observable{
 	
+	
+	private static Usuario mUsuario = new Usuario();
+
 	private String nombre;
 	private int puntuacionMaxima;
 	private CampoCasilla ultimoTablero;
 	private boolean userLoaded;
+	private int nivelElegido;
 	
-	SeleccionNivel e1 = new SeleccionNivel();
-	
-	
-	
+	SeleccionNivel selNivel = SeleccionNivel.getSeleccionNivel();
 	
 	// Tiempo del usuario.
-	int min;
 	int seg;
-	
-	private static Usuario mUsuario = new Usuario();
-	
+		
 	private Usuario() {
-		if(mUsuario==null){
-			mUsuario = new Usuario();
-			checkUserLoaded();
-		}
+
 	}
 	
 	public Usuario(String name){
@@ -36,7 +33,7 @@ public class Usuario {
 	}
 	//mirar..
 	public void setNombreUsuario(){
-		 nombre=e1.getNombreJugador();
+		 nombre=selNivel.getNombreJugador();
 	}
 	public void setNombre(String pNombre){
 		nombre = pNombre ;
@@ -69,5 +66,10 @@ public class Usuario {
 	}
 	public void setUltimoTablero(CampoCasilla ultimoTablero) {
 		this.ultimoTablero = ultimoTablero;
+	}
+	
+	public void setNivelElegido(int pNivel){
+		nivelElegido = pNivel;
+		notifyObservers();
 	}
 }

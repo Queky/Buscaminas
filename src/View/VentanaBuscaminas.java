@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controller.CambiarCasilla;
-
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -22,12 +20,13 @@ import java.util.Observer;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class VentanaBuscaminas extends JFrame implements Observer {
+public class VentanaBuscaminas extends JFrame implements Observer{
 
 	/**
 	 * Generated serial version ID
 	 */
 	private static final long serialVersionUID = 3350085996919535125L;
+	private static VentanaBuscaminas frame = new VentanaBuscaminas();
 	private JPanel contentPaneVentana;
 	private JPanel panelInformacion;
 	private JPanel panelCasillas;
@@ -35,7 +34,8 @@ public class VentanaBuscaminas extends JFrame implements Observer {
 	private JButton btnReiniciar;
 	private JLabel lblPuntuacin;
 	private JButton[][] btnVentana;
-	private int nivelElegido;
+	private int nivelElegido = 0;
+	private JLabel lblCurrentTime;
 
 	/**
 	 * Launch the application.
@@ -56,29 +56,20 @@ public class VentanaBuscaminas extends JFrame implements Observer {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaBuscaminas() {
-		// Contructor vacio para poder modificar primero las variables del tamaño
-		// initialize();
-	}
-	
-	public void inicializarVentana(){
+	private VentanaBuscaminas() {
 		initialize();
 	}
 	
+	public static VentanaBuscaminas getVentanaBuscaminas(){
+		return frame;
+	}
+	
 	private void initialize() {
+		
 		setTitle("Buscaminas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		int x, y;
-		if(nivelElegido==1){
-			x=390;
-			y=510;
-		}else if(nivelElegido==2){
-			x=420;
-			y=540;
-		}else{
-			x=450;
-			y=900;
-		}
+		int x = (nivelElegido == 1) ? 390 : (nivelElegido == 2) ? 420 : (nivelElegido == 3) ? 450 : 390;
+		int y = (nivelElegido == 1) ? 510 : (nivelElegido == 2) ? 540 : (nivelElegido == 3) ? 900 : 510;
 		setBounds(100, 100, x, y);
 		setMinimumSize(new Dimension(x, y));
 		contentPaneVentana = new JPanel();
@@ -87,11 +78,10 @@ public class VentanaBuscaminas extends JFrame implements Observer {
 		contentPaneVentana.setLayout(new BorderLayout(0, 0));
 		contentPaneVentana.add(getPanelInformacion(), BorderLayout.NORTH);
 		contentPaneVentana.add(getPanelCasillas(), BorderLayout.CENTER);
-		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		setLocationRelativeTo(null);
 		//pack();
+		//setVisible(true);
 	}
 
 	private JPanel getPanelInformacion() {
@@ -102,11 +92,14 @@ public class VentanaBuscaminas extends JFrame implements Observer {
 				gl_panelInformacion.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_panelInformacion.createSequentialGroup()
 						.addContainerGap()
-						.addComponent(getLblTiempo(), GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+						.addComponent(getLblTiempo())
 						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(getBtnReiniciar(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGap(12)
-						.addComponent(getLblPuntuacin(), GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+						.addComponent(getLblCurrentTime())
+						.addGap(31)
+						.addComponent(getBtnReiniciar(), GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(getLblPuntuacin())
+						.addGap(35))
 			);
 			gl_panelInformacion.setVerticalGroup(
 				gl_panelInformacion.createParallelGroup(Alignment.LEADING)
@@ -114,6 +107,7 @@ public class VentanaBuscaminas extends JFrame implements Observer {
 						.addContainerGap()
 						.addGroup(gl_panelInformacion.createParallelGroup(Alignment.BASELINE)
 							.addComponent(getLblTiempo())
+							.addComponent(getLblCurrentTime())
 							.addComponent(getLblPuntuacin())
 							.addComponent(getBtnReiniciar()))
 						.addContainerGap(9, Short.MAX_VALUE))
@@ -125,17 +119,8 @@ public class VentanaBuscaminas extends JFrame implements Observer {
 	private JPanel getPanelCasillas() {
 		if (panelCasillas == null) {
 			panelCasillas = new JPanel();
-			int x, y;
-			if(nivelElegido==1){
-				x=10;
-				y=7;
-			}else if(nivelElegido==2){
-				x=15;
-				y=10;
-			}else{
-				x=25;
-				y=12;
-			}
+			int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 10;
+			int y = (nivelElegido == 1) ? 7 : (nivelElegido == 10) ? 10 : (nivelElegido == 3) ? 12 : 7;
 			panelCasillas.setLayout(new GridLayout(x, y, -5, -5));
 			btnVentana = new JButton[y][x];
 			for(int i=0; i<y; i++){
@@ -179,9 +164,15 @@ public class VentanaBuscaminas extends JFrame implements Observer {
 		nivelElegido = pNivel;
 	}
 
+	private JLabel getLblCurrentTime() {
+		if (lblCurrentTime == null) {
+			lblCurrentTime = new JLabel("00:00");
+		}
+		return lblCurrentTime;
+	}
+
 	@Override
 	public void update(Observable pO, Object pArg) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("entra");
 	}
 }

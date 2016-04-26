@@ -1,15 +1,13 @@
 package Controller;
 
-import java.util.Observable;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import Model.Usuario;
 
-import View.VentanaBuscaminas;
-
-public class Buscaminas extends Observable{
+public class Buscaminas implements ActionListener{
 	
 	// Atributo que contiene la unica instancia de la clase
 	private static Buscaminas mBuscaminas = new Buscaminas();
-	private VentanaBuscaminas ventanaBuscaminas;
-	
 	
 	private Buscaminas() {
 
@@ -20,10 +18,15 @@ public class Buscaminas extends Observable{
 	}
 	
 	public void seleccionNivel(String pLevel){
-		int nivel = Integer.parseInt(pLevel);
-		ventanaBuscaminas = new VentanaBuscaminas();
-		ventanaBuscaminas.setNivelElegido(nivel);
-		ventanaBuscaminas.inicializarVentana();
+		int nivelElegido = Integer.parseInt(pLevel);
+		Usuario u = Usuario.getUsuario();
+		u.setNivelElegido(nivelElegido);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent pE) {
+		// TODO Auto-generated method stub
+		System.out.println(pE.paramString());
 	}
 
 }

@@ -26,7 +26,9 @@ public class SeleccionNivel extends JDialog{
 	private static Buscaminas buscaminas = Buscaminas.getBuscaminas();
 	private String selectedLevel;
 	private JComboBox<Object> comboBoxNivel;
-	private static SeleccionNivel dialog;
+	private static SeleccionNivel dialog = new SeleccionNivel();
+	private JButton okButton;
+	private JButton cancelButton;
 	
 
 	/**
@@ -41,12 +43,17 @@ public class SeleccionNivel extends JDialog{
 			e.printStackTrace();
 		}
 	}
+	
+	public static SeleccionNivel getSeleccionNivel(){
+		return dialog;
+	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public SeleccionNivel() {
+	private SeleccionNivel() {
 		setBounds(100, 100, 310, 160);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		panelDatos.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panelDatos, BorderLayout.CENTER);
@@ -77,38 +84,30 @@ public class SeleccionNivel extends JDialog{
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Aceptar");
+				okButton = new JButton("Aceptar");
 				okButton.setActionCommand("Aceptar");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-				okButton.addActionListener(new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent pE) {
-						// TODO Auto-generated method stub
-						selectedLevel=comboBoxNivel.getSelectedItem().toString();
-						buscaminas.seleccionNivel(selectedLevel);
-						dialog.setVisible(false);
-					}
-				});
 			}
 			{
-				JButton cancelButton = new JButton("Cancelar");
+				cancelButton = new JButton("Cancelar");
 				cancelButton.setActionCommand("Cancelar");
 				buttonPane.add(cancelButton);
-				cancelButton.addActionListener(new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent pE) {
-						// TODO Auto-generated method stub
-						// TODO Hay que hacer que vuelva al menu de inicio
-						dialog.dispose();
-					}
-				});
 			}
 		}
 	}
+	
 	public String getNombreJugador(){
 		return textFieldNombre.getText() ;
-		} 
+	}
+	
+	public void addController(ActionListener controller){
+		okButton.addActionListener(controller);
+		cancelButton.addActionListener(controller);
+	}
+	
+	public int getSelectedLevel(){
+		int numero = comboBoxNivel.getSelectedIndex() + 1;
+		return numero;
+	}
 }
