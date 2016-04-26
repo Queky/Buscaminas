@@ -6,15 +6,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controller.CambiarCasilla;
+
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class VentanaBuscaminas extends JFrame {
+public class VentanaBuscaminas extends JFrame implements Observer {
 
 	/**
 	 * Generated serial version ID
@@ -134,6 +142,13 @@ public class VentanaBuscaminas extends JFrame {
 				for(int j=0; j<x; j++){
 					btnVentana[i][j] = new JButton();
 					panelCasillas.add(btnVentana[i][j]);
+					btnVentana[i][j].addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent pE) {
+							
+						}
+					});
 				}
 			}
 		}
@@ -162,5 +177,11 @@ public class VentanaBuscaminas extends JFrame {
 	
 	public void setNivelElegido(int pNivel){
 		nivelElegido = pNivel;
+	}
+
+	@Override
+	public void update(Observable pO, Object pArg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

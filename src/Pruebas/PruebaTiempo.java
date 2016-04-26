@@ -5,10 +5,50 @@ import java.time.*;
 public class PruebaTiempo {
 	
 	public static void main(String[] args) {
-		int initM = LocalDateTime.now().getMinute();
-		int initS = LocalDateTime.now().getSecond();
+		int actualS = LocalDateTime.now().getSecond();
+		int postS = LocalDateTime.now().getSecond() + 1;
+		
+		int seg = 0;
+		int min = 0;
+		
+		String tiempo = "";
+		
+		boolean actualizar = false;
+		
 		while(true){
-			System.out.println((LocalDateTime.now().getMinute()-initM)+":"+(LocalDateTime.now().getSecond()));				
+			if(actualS==postS)
+				actualizar = true;
+				
+			if(actualizar){
+				if(seg == 59){
+					min ++;
+					seg = -1;
+				}
+				
+				if(min < 10)
+					tiempo += "0" + min + ":";
+				else
+					tiempo += min + ":";
+				
+				seg++;
+				if(seg < 10){
+					tiempo += "0" + seg;
+				}
+				else
+					tiempo += seg;
+				if(LocalDateTime.now().getSecond() < 59)
+					postS = LocalDateTime.now().getSecond() + 1;
+				else
+					postS = 1;
+				actualizar = true;
+				
+				if(actualizar){
+					System.out.println(tiempo);
+					actualizar = false;
+					tiempo = "";
+				}
+			}
+			actualS = LocalDateTime.now().getSecond();
 		}
 	}
 
