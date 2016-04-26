@@ -1,5 +1,6 @@
 package Model;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
@@ -9,9 +10,11 @@ public class Tiempo extends Observable{
 	private int tiempoTotalSeg;
 	private String tiempo = "";
 	private boolean reiniciar;
+	private LocalDateTime start;
 	
 	public Tiempo() {
 		Timer timer = new Timer();
+		start = LocalDateTime.now();
 		
 		timer.scheduleAtFixedRate(new TimerTask() {
 			
@@ -19,7 +22,9 @@ public class Tiempo extends Observable{
 			public void run() {
 				// TODO Auto-generated method stub
 				
-				int actualS = LocalDateTime.now().getSecond();
+				LocalDateTime actual = LocalDateTime.now();
+				Duration segundos = Duration.between(start, actual);
+				/*
 				int postS = LocalDateTime.now().getSecond() + 1;
 				
 				int seg = 0;
@@ -70,7 +75,7 @@ public class Tiempo extends Observable{
 						}
 					}
 					actualS = LocalDateTime.now().getSecond();
-				//}
+				//}*/
 				
 			}
 		}, 999, 999);

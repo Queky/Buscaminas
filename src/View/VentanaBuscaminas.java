@@ -34,7 +34,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JButton btnReiniciar;
 	private JLabel lblPuntuacin;
 	private JButton[][] btnVentana;
-	private int nivelElegido = 0;
+	private int nivelElegido;
 	private JLabel lblCurrentTime;
 
 	/**
@@ -124,8 +124,8 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		if (panelCasillas == null) {
 			panelCasillas = new JPanel();
 			int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 10;
-			int y = (nivelElegido == 1) ? 7 : (nivelElegido == 10) ? 10 : (nivelElegido == 3) ? 12 : 7;
-			panelCasillas.setLayout(new GridLayout(x, y, -5, -5));
+			int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 7;
+			panelCasillas.setLayout(new GridLayout(x, y, 0, 0));
 			btnVentana = new JButton[y][x];
 			for(int i=0; i<y; i++){
 				for(int j=0; j<x; j++){
@@ -166,6 +166,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	
 	public void setNivelElegido(int pNivel){
 		nivelElegido = pNivel;
+		System.out.println("entra y nivel 2");
 	}
 
 	private JLabel getLblCurrentTime() {

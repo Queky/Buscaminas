@@ -48,6 +48,7 @@ public class WindowController implements ActionListener{
 			else {
 				VentanaBuscaminas ventBuscaminas = VentanaBuscaminas.getVentanaBuscaminas();
 				ventBuscaminas.setNivelElegido(selNivel.getSelectedLevel());
+				ventBuscaminas = VentanaBuscaminas.getVentanaBuscaminas();
 				ventBuscaminas.inicializar();
 				selNivel.dispose();
 				Usuario user = Usuario.getUsuario();
