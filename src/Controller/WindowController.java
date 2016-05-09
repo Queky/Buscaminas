@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import Model.CampoCasilla;
 import Model.Usuario;
 import View.MenuUsuario;
 import View.SeleccionNivel;
@@ -51,7 +52,8 @@ public class WindowController implements ActionListener{
 				ventBuscaminas.inicializar();
 				selNivel.dispose();
 				Usuario user = Usuario.getUsuario();
-				System.out.println(selNivel.getSelectedLevel());
+				CampoCasilla tablero = CampoCasilla.getcampoCasillas();
+				tablero.inicializar(selNivel.getSelectedLevel());
 				user.setNivelElegido(selNivel.getSelectedLevel());
 				ventBuscaminas.setVisible(true);
 			}

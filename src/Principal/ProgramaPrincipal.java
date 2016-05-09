@@ -1,6 +1,7 @@
 package Principal;
 
 import Controller.WindowController;
+import Model.CampoCasilla;
 import Model.Usuario;
 import View.MenuUsuario;
 import View.SeleccionNivel;
@@ -15,6 +16,7 @@ public class ProgramaPrincipal {
 		
 		// Model
 		Usuario u = Usuario.getUsuario();
+		CampoCasilla cc = CampoCasilla.getcampoCasillas();
 		
 		// Controller
 		WindowController wC = new WindowController();

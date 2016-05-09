@@ -22,15 +22,15 @@ public class CampoCasilla implements Observer {
 	}
 
 	// Recibe la altura y anchura del tablero, Despues llama a rellenar Tablero
-	public void inicializar(int alto, int ancho) {
-
-		caCasillas = new Casilla[ancho][alto];
-
-		bombasTotales = (alto + ancho) / 2;
-		banderasTotales = 0;
-		RellenarTablero(); // lo Comento para hacer una prueba
-
-	}
+//	public void inicializar(int alto, int ancho) {
+//
+//		caCasillas = new Casilla[ancho][alto];
+//
+//		bombasTotales = (alto + ancho) / 2;
+//		banderasTotales = 0;
+//		RellenarTablero(); // lo Comento para hacer una prueba
+//
+//	}
 
 	// Rellena el tablero de casillas sin bombas, despues llama a introducir
 	// bombas para rellenarlo y a clacular minas cerca
@@ -47,21 +47,21 @@ public class CampoCasilla implements Observer {
 
 	}
 
-	public void inicializar(String dificultad) {
+	public void inicializar(int dificultad) {
 		int ancho = 0;
 		int alto = 0;
 		int bombas = 0;
-		if (dificultad.equals("facil")) {
+		if (dificultad==1) {
 			ancho = 7;
 			alto = 10;
 			bombas = ancho;
 		} else {
-			if (dificultad.equals("medio")) {
+			if (dificultad==2) {
 				ancho = 10;
 				alto = 15;
 				bombas = ancho * 2;
 			} else {
-				if (dificultad.equals("dificil")) {
+				if (dificultad==3) {
 					ancho = 12;
 					alto = 25;
 					bombas = ancho * 3;
@@ -81,19 +81,19 @@ public class CampoCasilla implements Observer {
 
 	// Rellena el tablero de casillas sin bombas, despues llama a introducir
 	// bombas para rellenarlo y a clacular minas cerca
-	public void RellenarTablero1() {
-
-		for (int i = 0; i < caCasillas.length; i++) {
-			for (int j = 0; j < caCasillas[i].length; j++) {
-				Casilla Casilla01 = new Casilla(false);
-				caCasillas[i][j] = Casilla01;
-			}
-		}
-
-		introducirBombas(caCasillas.length, caCasillas[0].length, bombasTotales);
-		calcularMinasCerca();
-
-	}
+//	public void RellenarTablero1() {
+//
+//		for (int i = 0; i < caCasillas.length; i++) {
+//			for (int j = 0; j < caCasillas[i].length; j++) {
+//				Casilla Casilla01 = new Casilla(false);
+//				caCasillas[i][j] = Casilla01;
+//			}
+//		}
+//
+//		introducirBombas(caCasillas.length, caCasillas[0].length, bombasTotales);
+//		calcularMinasCerca();
+//
+//	}
 
 	// introduce bombas en el mapa hasta llenar la cantidad
 	public void introducirBombas(int alto, int ancho, int cantidadBombas) {
@@ -151,20 +151,23 @@ public class CampoCasilla implements Observer {
 		}
 		if (izquierdo) {
 			caCasillas[posx][posy].getEstado().botonIzquierdo();
+			
 		}
 
+		//System.out.println("descubriendo casilla"+ posx +" "+ posy );
 	}
 
 	public void descubrirCasillaExpansion(int posx, int posy) {
 
-		if (caCasillas[posx][posy].getMinasCerca() == 0 && caCasillas[posx][posy].esMina() == false) {
+		if (caCasillas[posx][posy].getMinasCerca() == 0 && caCasillas[posx][posy].esMina() == false ) {
 			for (int i = Math.max(0, posx - 1); i <= Math.min(posx + 1, caCasillas.length - 1); i++) {
 				for (int j = Math.max(0, posy - 1); j <= Math.min(posy + 1, caCasillas[i].length - 1); j++) {
 
 					if (caCasillas[i][j].esMina() == false) {
 						caCasillas[i][j].getEstado().botonIzquierdo();
 						
-						if (caCasillas[i][j].getMinasCerca() == 0) {
+						if (caCasillas[i][j].getMinasCerca() == 0 &&
+								!(caCasillas[posx][posy].getEstado() instanceof Casilla.Visible)) {
 							descubrirCasillaExpansion(i, j);
 
 						}
@@ -174,6 +177,8 @@ public class CampoCasilla implements Observer {
 			}
 
 		}
+		
+		
 	}
 
 	public void comprobarjuego() {
@@ -226,6 +231,7 @@ public class CampoCasilla implements Observer {
 		}
 
 	}
+	
 
 	public Casilla[][] getCampoCasillas() {
 		return caCasillas;
@@ -260,10 +266,11 @@ public class CampoCasilla implements Observer {
 
 			if (casilla.esMina()) {
 				gameOver();
+				System.out.println("game over");
 			}
 			if (!casilla.esMina()) {
 				if (casilla.getMinasCerca() == 0) {
-					descubrirCasillaExpansion(casilla.getCoordX(), casilla.getCoordY());
+					//descubrirCasillaExpansion(casilla.getCoordX(), casilla.getCoordY());
 				}
 				if (casilla.getMinasCerca() != 0) {
 					System.out.println(casilla.getMinasCerca());
