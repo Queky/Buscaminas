@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controller.Buscaminas;
+import Model.CampoCasilla;
+
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -15,10 +18,14 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingUtilities;
 
 public class VentanaBuscaminas extends JFrame implements Observer{
 
@@ -123,19 +130,58 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JPanel getPanelCasillas() {
 		if (panelCasillas == null) {
 			panelCasillas = new JPanel();
+<<<<<<< HEAD
 			int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 10;
 			int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 7;
 			panelCasillas.setLayout(new GridLayout(x, y, 0, 0));
 			btnVentana = new JButton[y][x];
 			for(int i=0; i<y; i++){
 				for(int j=0; j<x; j++){
+=======
+			CampoCasilla tablero = new CampoCasilla();
+			tablero.inicializar(nivelElegido);
+			int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 3;
+			int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 3;
+			panelCasillas.setLayout(new GridLayout(x, y, 0, 0));
+			btnVentana = new JButton[x][y];
+			for(int i=0; i<x; i++){
+				for(int j=0; j<y; j++){
+>>>>>>> markel
 					btnVentana[i][j] = new JButton();
 					panelCasillas.add(btnVentana[i][j]);
-					btnVentana[i][j].addActionListener(new ActionListener() {
+					btnVentana[i][j].setActionCommand(String.format("%1$d-%2$d", i,j));
+					btnVentana[i][j].addMouseListener(new MouseAdapter() {
+					
 						
 						@Override
-						public void actionPerformed(ActionEvent pE) {
+						public void mouseClicked(MouseEvent pE) {
+							String command = ((JButton) pE.getComponent()).getActionCommand();
+							Scanner proc = new Scanner(command);
+							proc.useDelimiter("-");
+							int i = proc.nextInt();
+							int j = proc.nextInt();
 							
+							System.out.println(i + " " + j);
+							boolean izquierdo = false;
+							boolean derecho =false;
+							if (SwingUtilities.isLeftMouseButton(pE)) {
+								izquierdo=true;
+							}
+							else{
+								derecho=true;
+							}
+							System.out.println(pE.toString());
+							System.out.println(command);
+							tablero.enseñarTablero();
+							tablero.descubrirCasilla(i, j, derecho, izquierdo);
+							
+							
+							//CampoCasilla.getcampoCasillas().enseñarTablero();
+						
+							
+							//CampoCasilla.getcampoCasillas().descubrirCasilla(i, j, derecho, izquierdo);
+							
+				
 						}
 					});
 				}

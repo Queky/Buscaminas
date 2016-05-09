@@ -55,6 +55,12 @@ public class Usuario extends Observable{
 	public boolean getUserLoaded(){
 		return userLoaded;
 	}
+	
+	
+
+	public int getNivelElegido() {
+		return nivelElegido;
+	}
 
 	public int getPuntuacionMaxima() {
 		return puntuacionMaxima;
