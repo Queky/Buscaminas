@@ -22,8 +22,8 @@ public class CampoDeCasillaTest {
 		
 		for (int i = 0; i < testCasillasFacil.length; i++) {
 		for (int j = 0; j < testCasillasFacil[i].length; j++) {
-				Casilla Casilla01 = new Casilla(false);
-				testCasillasFacil[i][j]=Casilla01;
+				//Casilla Casilla01 = new Casilla(false);
+				//testCasillasFacil[i][j]=Casilla01;
 			}
 		}
 		
@@ -37,7 +37,7 @@ public class CampoDeCasillaTest {
 
 	@Test
 	public void testRellenarTablero() {
-		S.RellenarTablero();
+		S.rellenarTablero();
 		assertNotNull(S);
 		//assertEquals(M, S);
 		

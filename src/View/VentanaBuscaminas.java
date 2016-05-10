@@ -7,8 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controller.Buscaminas;
 import Model.CampoCasilla;
+import Model.Casilla;
+import Model.Tiempo;
 
 import java.awt.Dimension;
 import javax.swing.JLabel;
@@ -43,6 +44,8 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JButton[][] btnVentana;
 	private int nivelElegido;
 	private JLabel lblCurrentTime;
+	private Tiempo time = Tiempo.getTiempo();
+	private CampoCasilla campCasilla = CampoCasilla.getcampoCasillas();
 
 	/**
 	 * Launch the application.
@@ -68,6 +71,8 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	}
 	
 	public void inicializar(){
+		time.addObserver(frame);
+		campCasilla.addObserver(frame);
 		initialize();
 	}
 	
@@ -91,6 +96,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		contentPaneVentana.add(getPanelCasillas(), BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		time.iniciarTiempo();
 		//pack();
 		//setVisible(true);
 	}
@@ -130,8 +136,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JPanel getPanelCasillas() {
 		if (panelCasillas == null) {
 			panelCasillas = new JPanel();
-			CampoCasilla tablero = new CampoCasilla();
-			tablero.inicializar(nivelElegido);
+			campCasilla.inicializar(nivelElegido);
 			int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 3;
 			int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 3;
 			panelCasillas.setLayout(new GridLayout(x, y, 0, 0));
@@ -163,13 +168,10 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 							}
 							System.out.println(pE.toString());
 							System.out.println(command);
-							tablero.enseñarTablero();
-							tablero.descubrirCasilla(i, j, derecho, izquierdo);
-							
+							campCasilla.enseñarTablero();
+							campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
 							
 							//CampoCasilla.getcampoCasillas().enseñarTablero();
-						
-							
 							//CampoCasilla.getcampoCasillas().descubrirCasilla(i, j, derecho, izquierdo);
 							
 				
@@ -191,6 +193,14 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JButton getBtnReiniciar() {
 		if (btnReiniciar == null) {
 			btnReiniciar = new JButton("Reiniciar");
+			btnReiniciar.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent pE) {
+					if(btnReiniciar.isEnabled())
+						Tiempo.getTiempo().reiniciar();
+				}
+			});
 		}
 		return btnReiniciar;
 	}
@@ -215,6 +225,12 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 
 	@Override
 	public void update(Observable pO, Object pArg) {
-		System.out.println("entra");
+		if(pO.getClass().equals(Tiempo.class))
+			lblCurrentTime.setText(pArg.toString());
+		else if(pO.getClass().equals(CampoCasilla.class)){
+			Casilla casilla = (Casilla) pArg;
+			btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText(""+casilla.getMinasCerca());
+			btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
+		}
 	}
 }

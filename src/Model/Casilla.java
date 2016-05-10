@@ -22,13 +22,14 @@ public class Casilla extends Observable{
 
 	
 	
-	public Casilla(boolean tieneMina) {
+//	public Casilla(boolean tieneMina) {
+//	
+//		this.tieneMina = tieneMina;
+//	
+//		estado = new NoVisible();
+//	
+//	}
 	
-		this.tieneMina = tieneMina;
-	
-		estado = new NoVisible();
-	
-	}
 	public Casilla(boolean tieneMina, int i, int j) {
 		
 		this.tieneMina = tieneMina;
@@ -107,13 +108,11 @@ public class Casilla extends Observable{
 
 		@Override
 		public void botonDerecho() {
-		
 			
 		}
 
 		@Override
 		public void botonIzquierdo() {
-			
 			
 		}}
 	public class NoVisible implements State{
@@ -123,24 +122,17 @@ public class Casilla extends Observable{
 		@Override
 		public void botonDerecho() {
 			setEstado( new Bandera());
-			
-			
+	
 			setChanged();
 			notifyObservers(estado);
-			
 		}
-		
-		
 
 		@Override
 		public void botonIzquierdo() {
 			setEstado( new Visible());
 			
-			
 			setChanged();
 			notifyObservers(estado);
 			
 		}}
-	
-
 }

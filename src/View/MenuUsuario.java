@@ -156,14 +156,15 @@ public class MenuUsuario extends JFrame implements Observer{
 		}
 		return btnAyuda;
 	}
-	private JTextPane getTxtpnelJuegoConsiste() {
-		if (panelAyuda == null) {
-			panelAyuda = new JTextPane();
-			panelAyuda.setEditable(false);
-			panelAyuda.setText("1.-El juego consiste en despejar todas las casillas de una pantalla que no oculten una mina.\r\n2.-Algunas casillas tienen un número, el cual indica la cantidad de minas que hay en las casillas circundantes. \r\n3.-Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene mina y éstas se descubren automáticamente.\r\n4.-Si se descubre una casilla con una mina se pierde la partida.\r\n");
-		}
-		return panelAyuda;
-	}
+//	private JTextPane getTxtpnelJuegoConsiste() {
+//		if (panelAyuda == null) {
+//			panelAyuda = new JTextPane();
+//			panelAyuda.setEditable(false);
+//			panelAyuda.setText("1.-El juego consiste en despejar todas las casillas de una pantalla que no oculten una mina.\r\n2.-Algunas casillas tienen un número, el cual indica la cantidad de minas que hay en las casillas circundantes. \r\n3.-Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene mina y éstas se descubren automáticamente.\r\n4.-Si se descubre una casilla con una mina se pierde la partida.\r\n");
+//		}
+//		return panelAyuda;
+//	}
+	
 	private JButton getBtnSalir() {
 		if (btnSalir == null) {
 			btnSalir = new JButton("Salir");

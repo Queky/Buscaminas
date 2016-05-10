@@ -22,13 +22,13 @@ public class CampoDeCasillas {
 			CampoCasillas=new Casilla[20][20]; 
 	
 		}
-		RellenarTablero();
+		rellenarTablero();
 	}
 	
-	public void RellenarTablero(){
+	public void rellenarTablero(){
 		for (int i = 0; i < CampoCasillas.length; i++) {
 			for (int j = 0; j < CampoCasillas[i].length; j++) {
-				Casilla Casilla01 = new Casilla(false);
+				Casilla Casilla01 = new Casilla(false, i, j);
 				CampoCasillas[i][j]=Casilla01;
 			}
 		}
@@ -39,7 +39,7 @@ public class CampoDeCasillas {
 	
 	public CampoDeCasillas(int alto, int ancho) {
 		CampoCasillas = new Casilla[ancho][alto];
-		RellenarTablero();
+		rellenarTablero();
 		
 	}
 	
@@ -56,7 +56,7 @@ public class CampoDeCasillas {
 				i--;
 			}
 			
-			Casilla Casilla01 = new Casilla(true);
+			Casilla Casilla01 = new Casilla(true, posx, posy);
 			CampoCasillas[posx][posy]=Casilla01;
 		}
 		
