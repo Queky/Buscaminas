@@ -4,16 +4,18 @@ package Model;
 import java.util.Observable;
 import java.util.Observer;
 
-public class CampoCasilla implements Observer {
+import View.VentanaBuscaminas;
+
+public class CampoCasilla extends Observable implements Observer{
 
 	private Casilla[][] caCasillas;
 	private int bombasTotales;
 	private int banderasTotales;
 	private static CampoCasilla MCAMPOCASILLAS = new CampoCasilla();
 	private Usuario user;
+	
 
-	public static CampoCasilla getcampoCasillas() {
-
+	public static CampoCasilla getcampoCasillas(){
 		return MCAMPOCASILLAS;
 	}
 
@@ -39,6 +41,7 @@ public class CampoCasilla implements Observer {
 			for (int j = 0; j < caCasillas[i].length; j++) {
 				Casilla Casilla01 = new Casilla(false, i, j);
 				caCasillas[i][j] = Casilla01;
+				caCasillas[i][j].addObserver(MCAMPOCASILLAS);
 			}
 		}
 
@@ -109,8 +112,9 @@ public class CampoCasilla implements Observer {
 				i--;
 			}
 
-			Casilla Casilla01 = new Casilla(true);
-			caCasillas[posx][posy] = Casilla01;
+			//Casilla casilla01 = new Casilla(true, posx, posy);
+			//caCasillas[posx][posy] = casilla01;
+			caCasillas[posx][posy].setTieneMina(true);
 		}
 
 	}
@@ -259,18 +263,17 @@ public class CampoCasilla implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-
+		System.out.println("entra update");
 		Casilla casilla = (Casilla) o;
-
+		//VentanaBuscaminas ventBuscaminas = VentanaBuscaminas.getVentanaBuscaminas();
 		if (arg instanceof Casilla.Visible) {
-
 			if (casilla.esMina()) {
 				gameOver();
 				System.out.println("game over");
 			}
 			if (!casilla.esMina()) {
 				if (casilla.getMinasCerca() == 0) {
-					//descubrirCasillaExpansion(casilla.getCoordX(), casilla.getCoordY());
+					descubrirCasillaExpansion(casilla.getCoordX(), casilla.getCoordY());
 				}
 				if (casilla.getMinasCerca() != 0) {
 					System.out.println(casilla.getMinasCerca());
@@ -291,7 +294,10 @@ public class CampoCasilla implements Observer {
 			banderasTotales--;
 
 		}
-
+		// Mark for change
+		setChanged();
+		//Notify observer class
+		notifyObservers(casilla);
 		comprobarjuego();
 
 	}

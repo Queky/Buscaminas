@@ -11,15 +11,15 @@ public class Juego {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	
-		Casilla Casilla00 = new Casilla(true);
-		Casilla Casilla01 = new Casilla(false);
-		Casilla Casilla02 = new Casilla(false);
-		Casilla Casilla10 = new Casilla(false);
-		Casilla Casilla11 = new Casilla(true);
-		Casilla Casilla12 = new Casilla(false);
-		Casilla Casilla20 = new Casilla(false);
-		Casilla Casilla21 = new Casilla(true);
-		Casilla Casilla22 = new Casilla(false);
+//		Casilla Casilla00 = new Casilla(true);
+//		Casilla Casilla01 = new Casilla(false);
+//		Casilla Casilla02 = new Casilla(false);
+//		Casilla Casilla10 = new Casilla(false);
+//		Casilla Casilla11 = new Casilla(true);
+//		Casilla Casilla12 = new Casilla(false);
+//		Casilla Casilla20 = new Casilla(false);
+//		Casilla Casilla21 = new Casilla(true);
+//		Casilla Casilla22 = new Casilla(false);
 		
 		Casilla[][] CampoDeCasillas1= new Casilla[2][2];
 		

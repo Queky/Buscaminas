@@ -8,7 +8,7 @@ public class Juego {
 
 	CampoCasilla Tablero=  CampoCasilla.getcampoCasillas();
 	//Tablero.inicializar(7, 10);
-	Tablero.inicializar("facil");
+	//Tablero.inicializar("facil");
 	Tablero.enseñarTablero();
 	
 		
