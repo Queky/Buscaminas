@@ -130,14 +130,6 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JPanel getPanelCasillas() {
 		if (panelCasillas == null) {
 			panelCasillas = new JPanel();
-<<<<<<< HEAD
-			int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 10;
-			int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 7;
-			panelCasillas.setLayout(new GridLayout(x, y, 0, 0));
-			btnVentana = new JButton[y][x];
-			for(int i=0; i<y; i++){
-				for(int j=0; j<x; j++){
-=======
 			CampoCasilla tablero = new CampoCasilla();
 			tablero.inicializar(nivelElegido);
 			int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 3;
@@ -146,7 +138,6 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			btnVentana = new JButton[x][y];
 			for(int i=0; i<x; i++){
 				for(int j=0; j<y; j++){
->>>>>>> markel
 					btnVentana[i][j] = new JButton();
 					panelCasillas.add(btnVentana[i][j]);
 					btnVentana[i][j].setActionCommand(String.format("%1$d-%2$d", i,j));
