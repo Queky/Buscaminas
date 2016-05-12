@@ -134,5 +134,10 @@ public class Casilla extends Observable{
 			setChanged();
 			notifyObservers(estado);
 			
-		}}
+		}
+	}
+	
+	public void reiniciarCasilla(int i, int j){
+		estado = new NoVisible();
+	}
 }

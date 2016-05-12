@@ -301,5 +301,13 @@ public class CampoCasilla extends Observable implements Observer{
 		comprobarjuego();
 
 	}
+	
+	public void reiniciarCasillas(){
+		for (int i = 0; i < caCasillas.length; i++) {
+			for (int j = 0; j < caCasillas[i].length; j++) {
+				caCasillas[i][j].reiniciarCasilla(i, j);
+			}
+		}
+	}
 
 }

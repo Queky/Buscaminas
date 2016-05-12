@@ -83,7 +83,6 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private void initialize() {
 		
 		setTitle("Buscaminas");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		int x = (nivelElegido == 1) ? 390 : (nivelElegido == 2) ? 420 : (nivelElegido == 3) ? 450 : 390;
 		int y = (nivelElegido == 1) ? 510 : (nivelElegido == 2) ? 540 : (nivelElegido == 3) ? 900 : 510;
 		setBounds(100, 100, x, y);
@@ -99,6 +98,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		time.iniciarTiempo();
 		//pack();
 		//setVisible(true);
+		
 	}
 
 	private JPanel getPanelInformacion() {
@@ -182,6 +182,18 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		}
 		return panelCasillas;
 	}
+	
+	private void reiniciarCasillas(){
+		int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 3;
+		int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 3;
+		
+		for(int i=0; i<x; i++){
+			for(int j=0; j<y; j++){
+				btnVentana[i][j].setText("");
+				btnVentana[i][j].setEnabled(true);
+			}
+		}
+	}
 
 	
 	private JLabel getLblTiempo() {
@@ -197,8 +209,11 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 				
 				@Override
 				public void actionPerformed(ActionEvent pE) {
-					if(btnReiniciar.isEnabled())
+					if(btnReiniciar.isEnabled()){
 						Tiempo.getTiempo().reiniciar();
+						reiniciarCasillas();
+						campCasilla.reiniciarCasillas();
+					}
 				}
 			});
 		}
@@ -229,7 +244,13 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			lblCurrentTime.setText(pArg.toString());
 		else if(pO.getClass().equals(CampoCasilla.class)){
 			Casilla casilla = (Casilla) pArg;
-			btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText(""+casilla.getMinasCerca());
+			if(casilla.getMinasCerca() != 0 && !casilla.esMina())
+				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("" + casilla.getMinasCerca());
+			else if (casilla.esMina()){
+				//sacar  JDialog y pasar al menu inicio
+				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("X");
+				Tiempo.getTiempo().pararTiempo();
+			}
 			btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
 		}
 	}
