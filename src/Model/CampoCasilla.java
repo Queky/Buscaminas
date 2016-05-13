@@ -170,8 +170,7 @@ public class CampoCasilla extends Observable implements Observer{
 					if (caCasillas[i][j].esMina() == false) {
 						caCasillas[i][j].getEstado().botonIzquierdo();
 						
-						if (caCasillas[i][j].getMinasCerca() == 0 &&
-								!(caCasillas[posx][posy].getEstado() instanceof Casilla.Visible)) {
+						if (caCasillas[i][j].getMinasCerca() == 0 && !(caCasillas[posx][posy].getEstado() instanceof Casilla.Visible)) {
 							descubrirCasillaExpansion(i, j);
 
 						}

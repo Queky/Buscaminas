@@ -2,6 +2,7 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,14 +14,21 @@ import Model.Tiempo;
 
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.imageio.ImageIO;
+import javax.print.DocFlavor.URL;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
@@ -224,12 +232,85 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 
 	@Override
 	public void update(Observable pO, Object pArg) {
+
 		if(pO.getClass().equals(Tiempo.class))
 			lblCurrentTime.setText(pArg.toString());
 		else if(pO.getClass().equals(CampoCasilla.class)){
+			
 			Casilla casilla = (Casilla) pArg;
-			btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText(""+casilla.getMinasCerca());
-			btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
+			if (casilla.getEstado() instanceof Casilla.Visible) {
+				
+				if (casilla.esMina()) {
+
+					
+					
+					//boton.setIcon(new ImageIcon("ruta de la imagen")); 
+					//btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon(img));
+					
+//					try 
+//			        {
+//			            Image img = ImageIO.read(getClass().getResource("Images\\BBishopB.gif"));
+//			            button.setIcon(new ImageIcon(img));
+//			        } 
+//			        catch (IOException ex) {}
+////
+////					
+////					
+//					
+//					
+//					  try {
+//						  
+//						  java.net.URL imgURL = getClass().getResource("\\Img\\mina.jpg");
+//						  Image img = ImageIO.read(imgURL);
+//						  
+//						//    Image img = ImageIO.read(getClass().getResource("/Img/mina.jpg"));
+//						    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon(img));
+//						    validate();
+//						  //  btnVentana[casilla.getCoordX()][casilla.getCoordY()].
+//						  } catch (IOException ex) {
+//						  }
+				
+						//btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("X");
+						//btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
+						
+					//	if(selNivel.getNombreJugador().equals("")){
+				    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon("./Imagenes/mina.jpg"));
+							JOptionPane.showMessageDialog(btnVentana[casilla.getCoordX()][casilla.getCoordY()],
+									"  GAME OVER \n",
+								    "Fin del juego",
+								    JOptionPane.ERROR_MESSAGE);
+					//	}
+						
+				
+				
+				}else{
+					
+					if (casilla.getMinasCerca()==0) {
+						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("");
+						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
+					}
+					if (casilla.getMinasCerca()!=0) {
+						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText(""+casilla.getMinasCerca());
+						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
+					}
+					
+					
+				}}
+			if (casilla.getEstado() instanceof Casilla.NoVisible) {
+				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("");
+				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(true);
+				
+			}
+			if (casilla.getEstado() instanceof Casilla.Bandera) {
+				
+				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("B");
+			}
+			
+			
+			
+			
+	
+			
 		}
 	}
 }
