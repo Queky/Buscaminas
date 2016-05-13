@@ -54,6 +54,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JLabel lblCurrentTime;
 	private Tiempo time = Tiempo.getTiempo();
 	private CampoCasilla campCasilla = CampoCasilla.getcampoCasillas();
+	private boolean inicializado= false;
 
 	/**
 	 * Launch the application.
@@ -177,13 +178,16 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 							System.out.println(pE.toString());
 							System.out.println(command);
 							campCasilla.enseñarTablero();
-							campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
 							
-							//CampoCasilla.getcampoCasillas().enseñarTablero();
-							//CampoCasilla.getcampoCasillas().descubrirCasilla(i, j, derecho, izquierdo);
-							
-				
-						}
+							if (inicializado) {
+								campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
+							} else {
+								inicializado=true;
+								campCasilla.introducirBombas(campCasilla.getBombasTotales(),i,j);
+								campCasilla.calcularMinasCerca();
+					
+								campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
+							}}
 					});
 				}
 			}
@@ -241,7 +245,9 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			if (casilla.getEstado() instanceof Casilla.Visible) {
 				
 				if (casilla.esMina()) {
+
 				    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon("./Imagenes/mina.jpg"));
+
 							JOptionPane.showMessageDialog(btnVentana[casilla.getCoordX()][casilla.getCoordY()],
 									"  GAME OVER \n",
 								    "Fin del juego",

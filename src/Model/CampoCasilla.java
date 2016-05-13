@@ -23,19 +23,7 @@ public class CampoCasilla extends Observable implements Observer{
 
 	}
 
-	// Recibe la altura y anchura del tablero, Despues llama a rellenar Tablero
-//	public void inicializar(int alto, int ancho) {
-//
-//		caCasillas = new Casilla[ancho][alto];
-//
-//		bombasTotales = (alto + ancho) / 2;
-//		banderasTotales = 0;
-//		RellenarTablero(); // lo Comento para hacer una prueba
-//
-//	}
 
-	// Rellena el tablero de casillas sin bombas, despues llama a introducir
-	// bombas para rellenarlo y a clacular minas cerca
 	public void RellenarTablero() {
 		for (int i = 0; i < caCasillas.length; i++) {
 			for (int j = 0; j < caCasillas[i].length; j++) {
@@ -44,10 +32,6 @@ public class CampoCasilla extends Observable implements Observer{
 				caCasillas[i][j].addObserver(MCAMPOCASILLAS);
 			}
 		}
-
-		introducirBombas(caCasillas.length, caCasillas[0].length, bombasTotales);
-		calcularMinasCerca();
-
 	}
 
 	public void inicializar(int dificultad) {
@@ -82,40 +66,27 @@ public class CampoCasilla extends Observable implements Observer{
 
 	}
 
-	// Rellena el tablero de casillas sin bombas, despues llama a introducir
-	// bombas para rellenarlo y a clacular minas cerca
-//	public void RellenarTablero1() {
-//
-//		for (int i = 0; i < caCasillas.length; i++) {
-//			for (int j = 0; j < caCasillas[i].length; j++) {
-//				Casilla Casilla01 = new Casilla(false);
-//				caCasillas[i][j] = Casilla01;
-//			}
-//		}
-//
-//		introducirBombas(caCasillas.length, caCasillas[0].length, bombasTotales);
-//		calcularMinasCerca();
-//
-//	}
-
 	// introduce bombas en el mapa hasta llenar la cantidad
-	public void introducirBombas(int alto, int ancho, int cantidadBombas) {
+	public void introducirBombas(int cantidadBombas, int x, int y) {
 		int posx = 0;
 		int posy = 0;
 
 		for (int i = 0; i < cantidadBombas; i++) {
 
-			posx = (int) (Math.random() * alto + 0);
-			posy = (int) (Math.random() * ancho + 0);
+			posx = (int) (Math.random() * caCasillas.length + 0);
+			posy = (int) (Math.random() * caCasillas[0].length + 0);
 
 			if (caCasillas[posx][posy].esMina()) {
 				i--;
 			}
-
-			//Casilla casilla01 = new Casilla(true, posx, posy);
-			//caCasillas[posx][posy] = casilla01;
-			caCasillas[posx][posy].setTieneMina(true);
-		}
+			
+			if (!(posx==x && posy==y)) {
+				caCasillas[posx][posy].setTieneMina(true);
+			}
+			if ((posx==x && posy==y)) {
+				i--;
+				}
+}
 
 	}
 
@@ -157,8 +128,6 @@ public class CampoCasilla extends Observable implements Observer{
 			caCasillas[posx][posy].getEstado().botonIzquierdo();
 			
 		}
-
-		//System.out.println("descubriendo casilla"+ posx +" "+ posy );
 	}
 
 	public void descubrirCasillaExpansion(int posx, int posy) {
