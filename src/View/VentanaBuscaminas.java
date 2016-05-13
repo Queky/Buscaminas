@@ -3,7 +3,10 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+<<<<<<< HEAD
 import java.awt.Graphics2D;
+=======
+>>>>>>> markel
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,16 +18,28 @@ import Model.Tiempo;
 
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.imageio.ImageIO;
+<<<<<<< HEAD
+=======
+import javax.print.DocFlavor.URL;
+>>>>>>> markel
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
+<<<<<<< HEAD
 import javax.swing.Icon;
 
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+=======
+import javax.swing.ImageIcon;
+
+import java.awt.GridLayout;
+import java.awt.Image;
+>>>>>>> markel
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -248,10 +263,13 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 
 	@Override
 	public void update(Observable pO, Object pArg) {
+
 		if(pO.getClass().equals(Tiempo.class))
 			lblCurrentTime.setText(pArg.toString());
 		else if(pO.getClass().equals(CampoCasilla.class)){
+			
 			Casilla casilla = (Casilla) pArg;
+<<<<<<< HEAD
 			if(casilla.getMinasCerca() != 0 && !casilla.esMina())
 				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("" + casilla.getMinasCerca());
 			else if (casilla.esMina()){
@@ -261,6 +279,44 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 				Tiempo.getTiempo().pararTiempo();
 			}
 			btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
+=======
+			if (casilla.getEstado() instanceof Casilla.Visible) {
+				
+				if (casilla.esMina()) {
+				    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon("./Imagenes/mina.jpg"));
+							JOptionPane.showMessageDialog(btnVentana[casilla.getCoordX()][casilla.getCoordY()],
+									"  GAME OVER \n",
+								    "Fin del juego",
+								    JOptionPane.ERROR_MESSAGE);						
+				}else{
+					
+					if (casilla.getMinasCerca()==0) {
+						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("");
+						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
+					}
+					if (casilla.getMinasCerca()!=0) {
+						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText(""+casilla.getMinasCerca());
+						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
+					}
+					
+					
+				}}
+			if (casilla.getEstado() instanceof Casilla.NoVisible) {
+				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("");
+				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(true);
+				
+			}
+			if (casilla.getEstado() instanceof Casilla.Bandera) {
+				
+				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("B");
+			}
+			
+			
+			
+			
+	
+			
+>>>>>>> markel
 		}
 	}
 }
