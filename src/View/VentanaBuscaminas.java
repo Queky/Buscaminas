@@ -241,48 +241,11 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			if (casilla.getEstado() instanceof Casilla.Visible) {
 				
 				if (casilla.esMina()) {
-
-					
-					
-					//boton.setIcon(new ImageIcon("ruta de la imagen")); 
-					//btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon(img));
-					
-//					try 
-//			        {
-//			            Image img = ImageIO.read(getClass().getResource("Images\\BBishopB.gif"));
-//			            button.setIcon(new ImageIcon(img));
-//			        } 
-//			        catch (IOException ex) {}
-////
-////					
-////					
-//					
-//					
-//					  try {
-//						  
-//						  java.net.URL imgURL = getClass().getResource("\\Img\\mina.jpg");
-//						  Image img = ImageIO.read(imgURL);
-//						  
-//						//    Image img = ImageIO.read(getClass().getResource("/Img/mina.jpg"));
-//						    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon(img));
-//						    validate();
-//						  //  btnVentana[casilla.getCoordX()][casilla.getCoordY()].
-//						  } catch (IOException ex) {
-//						  }
-				
-						//btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("X");
-						//btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
-						
-					//	if(selNivel.getNombreJugador().equals("")){
 				    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon("./Imagenes/mina.jpg"));
 							JOptionPane.showMessageDialog(btnVentana[casilla.getCoordX()][casilla.getCoordY()],
 									"  GAME OVER \n",
 								    "Fin del juego",
-								    JOptionPane.ERROR_MESSAGE);
-					//	}
-						
-				
-				
+								    JOptionPane.ERROR_MESSAGE);						
 				}else{
 					
 					if (casilla.getMinasCerca()==0) {
