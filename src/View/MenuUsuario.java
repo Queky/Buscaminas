@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import javax.swing.JButton;
@@ -61,7 +62,7 @@ public class MenuUsuario extends JFrame implements Observer{
 	
 	private void initialize() {
 		setTitle("Buscaminas");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 470, 525);
 		setMinimumSize(new Dimension(470, 525));
 		contentPane = new JPanel();

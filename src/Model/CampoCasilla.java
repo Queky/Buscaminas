@@ -22,21 +22,10 @@ public class CampoCasilla extends Observable implements Observer{
 	public CampoCasilla() {
 
 	}
-
-	// Recibe la altura y anchura del tablero, Despues llama a rellenar Tablero
-//	public void inicializar(int alto, int ancho) {
-//
-//		caCasillas = new Casilla[ancho][alto];
-//
-//		bombasTotales = (alto + ancho) / 2;
-//		banderasTotales = 0;
-//		RellenarTablero(); // lo Comento para hacer una prueba
-//
-//	}
-
+	
 	// Rellena el tablero de casillas sin bombas, despues llama a introducir
 	// bombas para rellenarlo y a clacular minas cerca
-	public void RellenarTablero() {
+	public void rellenarTablero() {
 		for (int i = 0; i < caCasillas.length; i++) {
 			for (int j = 0; j < caCasillas[i].length; j++) {
 				Casilla Casilla01 = new Casilla(false, i, j);
@@ -78,7 +67,7 @@ public class CampoCasilla extends Observable implements Observer{
 		// bombasTotales = (alto + ancho) / 2;
 		bombasTotales = bombas;
 		banderasTotales = 0;
-		RellenarTablero();
+		rellenarTablero();
 
 	}
 

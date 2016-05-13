@@ -34,7 +34,7 @@ public class Juego {
 		
 	CampoDeCasillas Tablero= new CampoDeCasillas(9,9);
 	//CampoDeCasillas Tablero= new CampoDeCasillas("dificil");
-	Tablero.EnseñarTablero();
+	Tablero.enseñarTablero();
 
 		
 	//	CampoDeCasillas CampoDeCasillas1= new CampoDeCasillas[][](null, 2, 2);

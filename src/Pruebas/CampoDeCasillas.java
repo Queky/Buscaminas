@@ -4,14 +4,9 @@ import Model.Casilla;
 
 public class CampoDeCasillas {
 	private Casilla[][] CampoCasillas;
-	
-	
 
-
-	
 	public CampoDeCasillas(String dificultad) {
-		//Hacer ENUM
-		//Patron FACTORY
+
 		if (dificultad.equals("facil")) {
 			CampoCasillas=new Casilla[5][5]; 					
 		}
@@ -33,7 +28,7 @@ public class CampoDeCasillas {
 			}
 		}
 		
-		IntroducirBombas(CampoCasillas.length, CampoCasillas[0].length, (CampoCasillas.length+CampoCasillas[0].length)/2);
+		introducirBombas(CampoCasillas.length, CampoCasillas[0].length, (CampoCasillas.length+CampoCasillas[0].length)/2);
 		
 	}
 	
@@ -43,7 +38,7 @@ public class CampoDeCasillas {
 		
 	}
 	
-	public void IntroducirBombas(int alto, int ancho, int cantidadBombas){
+	public void introducirBombas(int alto, int ancho, int cantidadBombas){
 		int posx=0;
 		int posy=0;
 		
@@ -64,7 +59,7 @@ public class CampoDeCasillas {
 		
 	}
 	
-	public void EnseñarTablero(){
+	public void enseñarTablero(){
 		for (int i = 0; i < CampoCasillas.length; i++) {
 			for (int j = 0; j < CampoCasillas[0].length; j++) {
 				if (CampoCasillas[i][j].esMina()) {
@@ -79,7 +74,7 @@ public class CampoDeCasillas {
 		
 	}
 	
-	public void CalcularMinasCerca(){
+	public void calcularMinasCerca(){
 		for (int i = 0; i < CampoCasillas.length; i++) {
 			for (int j = 0; j < CampoCasillas[i].length; j++) {
 				int minasCerca =0;

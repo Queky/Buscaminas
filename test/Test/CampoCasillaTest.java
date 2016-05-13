@@ -62,7 +62,7 @@ public class CampoCasillaTest {
 	@Test
 	public void testCalcularMinasCerca() {
 		//B.inicializar(5, 5);
-		B.RellenarTablero();
+		B.rellenarTablero();
 		
 		
 	}

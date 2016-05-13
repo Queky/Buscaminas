@@ -10,8 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import Controller.Buscaminas;
+import Model.Tiempo;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -35,15 +37,14 @@ public class SeleccionNivel extends JDialog{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			dialog = new SeleccionNivel();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			dialog.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public static SeleccionNivel getSeleccionNivel(){
 		return dialog;
@@ -53,6 +54,7 @@ public class SeleccionNivel extends JDialog{
 	 * Create the dialog.
 	 */
 	private SeleccionNivel() {
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 310, 160);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());

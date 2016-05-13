@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import Model.CampoCasilla;
+import Model.Tiempo;
 import Model.Usuario;
 import View.MenuUsuario;
 import View.SeleccionNivel;
@@ -31,12 +32,14 @@ public class WindowController implements ActionListener{
 												+ "partida.\r\n", "Ayuda", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if(pE.getActionCommand().equals("Nuevo juego")){
+			Tiempo.getTiempo().reiniciar();
 			menu.setVisible(false);
 			SeleccionNivel selNivel = SeleccionNivel.getSeleccionNivel();
 			selNivel.setVisible(true);
 		}
 		else if(pE.getActionCommand().equals("Salir")){
 			menu.dispose();
+			System.exit(0);
 		}
 		else if(pE.getActionCommand().equals("Aceptar")){
 			SeleccionNivel selNivel = SeleccionNivel.getSeleccionNivel();
@@ -55,6 +58,7 @@ public class WindowController implements ActionListener{
 				Usuario user = Usuario.getUsuario();
 				CampoCasilla tablero = CampoCasilla.getcampoCasillas();
 				tablero.inicializar(selNivel.getSelectedLevel());
+				tablero.rellenarTablero();
 				user.setNivelElegido(selNivel.getSelectedLevel());
 				ventBuscaminas.setVisible(true);
 			}

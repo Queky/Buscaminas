@@ -75,8 +75,8 @@ public class Tiempo extends Observable{
 		return tiempo;
 	}
 	
-	public void iniciarTiempo(){
-		iniciar = true;
+	public void iniciarTiempo(boolean init){
+		iniciar = init;
 		stop = false;
 	}
 	

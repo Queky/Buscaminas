@@ -3,10 +3,6 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Graphics;
-<<<<<<< HEAD
-import java.awt.Graphics2D;
-=======
->>>>>>> markel
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,37 +16,24 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import javax.imageio.ImageIO;
-<<<<<<< HEAD
-=======
-import javax.print.DocFlavor.URL;
->>>>>>> markel
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
-<<<<<<< HEAD
-import javax.swing.Icon;
-
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
-=======
-import javax.swing.ImageIcon;
-
-import java.awt.GridLayout;
-import java.awt.Image;
->>>>>>> markel
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 public class VentanaBuscaminas extends JFrame implements Observer{
 
@@ -69,8 +52,9 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private int nivelElegido;
 	private JLabel lblCurrentTime;
 	private Tiempo time = Tiempo.getTiempo();
-	private CampoCasilla campCasilla = CampoCasilla.getcampoCasillas();
-
+	private CampoCasilla campCasilla = CampoCasilla.getcampoCasillas(); 
+	private String rutaMina;
+			
 	/**
 	 * Launch the application.
 	 */
@@ -117,9 +101,9 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		contentPaneVentana.setLayout(new BorderLayout(0, 0));
 		contentPaneVentana.add(getPanelInformacion(), BorderLayout.NORTH);
 		contentPaneVentana.add(getPanelCasillas(), BorderLayout.CENTER);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		time.iniciarTiempo();
+		time.iniciarTiempo(true);
 		//pack();
 		//setVisible(true);	
 	}
@@ -159,7 +143,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JPanel getPanelCasillas() {
 		if (panelCasillas == null) {
 			panelCasillas = new JPanel();
-			campCasilla.inicializar(nivelElegido);
+			//campCasilla.inicializar(nivelElegido);
 			int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 3;
 			int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 3;
 			panelCasillas.setLayout(new GridLayout(x, y, 0, 0));
@@ -214,6 +198,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			for(int j=0; j<y; j++){
 				btnVentana[i][j].setText("");
 				btnVentana[i][j].setEnabled(true);
+				btnVentana[i][j].setIcon(null);				
 			}
 		}
 	}
@@ -233,7 +218,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 				@Override
 				public void actionPerformed(ActionEvent pE) {
 					if(btnReiniciar.isEnabled()){
-						Tiempo.getTiempo().reiniciar();
+						time.reiniciar();
 						reiniciarCasillas();
 						campCasilla.reiniciarCasillas();
 					}
@@ -251,6 +236,8 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	
 	public void setNivelElegido(int pNivel){
 		nivelElegido = pNivel;
+		rutaMina = "./Imagenes/mina";
+		rutaMina += (pNivel == 1) ? "Nivel1.png" : (pNivel == 2) ? "Nivel2.png" : "Nivel3.png";
 		System.out.println("entra y nivel 2");
 	}
 
@@ -267,29 +254,18 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		if(pO.getClass().equals(Tiempo.class))
 			lblCurrentTime.setText(pArg.toString());
 		else if(pO.getClass().equals(CampoCasilla.class)){
-			
 			Casilla casilla = (Casilla) pArg;
-<<<<<<< HEAD
-			if(casilla.getMinasCerca() != 0 && !casilla.esMina())
-				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("" + casilla.getMinasCerca());
-			else if (casilla.esMina()){
-				//sacar  JDialog y pasar al menu inicio
-				//btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("X");
-				//btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon("./Imagenes/img.jpg"));
-				Tiempo.getTiempo().pararTiempo();
-			}
-			btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
-=======
 			if (casilla.getEstado() instanceof Casilla.Visible) {
-				
 				if (casilla.esMina()) {
-				    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon("./Imagenes/mina.jpg"));
-							JOptionPane.showMessageDialog(btnVentana[casilla.getCoordX()][casilla.getCoordY()],
-									"  GAME OVER \n",
-								    "Fin del juego",
-								    JOptionPane.ERROR_MESSAGE);						
+					time.pararTiempo();
+					time.iniciarTiempo(false);
+				    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon(rutaMina));
+					JOptionPane.showMessageDialog(frame, "  GAME OVER \n", "Fin del juego", JOptionPane.ERROR_MESSAGE);
+					frame.dispose();
+					reiniciarCasillas();
+					lblCurrentTime.setText("00:00");
+					MenuUsuario.getMenuUsuario().setVisible(true);
 				}else{
-					
 					if (casilla.getMinasCerca()==0) {
 						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("");
 						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
@@ -298,25 +274,15 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText(""+casilla.getMinasCerca());
 						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(false);
 					}
-					
-					
-				}}
+				}
+			}
 			if (casilla.getEstado() instanceof Casilla.NoVisible) {
 				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("");
 				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setEnabled(true);
-				
 			}
 			if (casilla.getEstado() instanceof Casilla.Bandera) {
-				
 				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("B");
 			}
-			
-			
-			
-			
-	
-			
->>>>>>> markel
 		}
 	}
 }
