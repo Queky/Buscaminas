@@ -97,8 +97,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		setLocationRelativeTo(null);
 		time.iniciarTiempo();
 		//pack();
-		//setVisible(true);
-		
+		//setVisible(true);	
 	}
 
 	private JPanel getPanelInformacion() {
