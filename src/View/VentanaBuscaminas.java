@@ -143,7 +143,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			for(int i=0; i<x; i++){
 				for(int j=0; j<y; j++){
 					btnVentana[i][j] = new JButton();
-					btnVentana[i][j].repaint();
+					//btnVentana[i][j].repaint();
 					btnVentana[i][j].revalidate();
 					panelCasillas.add(btnVentana[i][j]);
 					btnVentana[i][j].setActionCommand(String.format("%1$d-%2$d", i,j));
@@ -193,6 +193,17 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 				btnVentana[i][j].setText("");
 				btnVentana[i][j].setEnabled(true);
 				btnVentana[i][j].setIcon(null);				
+			}
+		}
+	}
+	
+	private void reiniciarCasillaCambioNivel(){
+		int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 3;
+		int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 3;
+		
+		for(int i=0; i<x; i++){
+			for(int j=0; j<y; j++){
+				btnVentana[i][j].removeAll();			
 			}
 		}
 	}
@@ -258,6 +269,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 					dispose();
 					//removeAll();
 					reiniciarCasillas();
+					reiniciarCasillaCambioNivel();
 					lblCurrentTime.setText("00:00");
 					MenuUsuario.getMenuUsuario().setVisible(true);
 				}else{
