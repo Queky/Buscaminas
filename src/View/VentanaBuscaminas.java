@@ -58,18 +58,6 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaBuscaminas frame = new VentanaBuscaminas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -104,6 +92,11 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		time.iniciarTiempo(true);
+		contentPaneVentana.validate();
+		contentPaneVentana.repaint();
+		
+		repaint();
+		validate();
 		//pack();
 		//setVisible(true);	
 	}
@@ -143,7 +136,6 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JPanel getPanelCasillas() {
 		if (panelCasillas == null) {
 			panelCasillas = new JPanel();
-			//campCasilla.inicializar(nivelElegido);
 			int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 3;
 			int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 3;
 			panelCasillas.setLayout(new GridLayout(x, y, 0, 0));
@@ -151,6 +143,8 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			for(int i=0; i<x; i++){
 				for(int j=0; j<y; j++){
 					btnVentana[i][j] = new JButton();
+					btnVentana[i][j].repaint();
+					btnVentana[i][j].revalidate();
 					panelCasillas.add(btnVentana[i][j]);
 					btnVentana[i][j].setActionCommand(String.format("%1$d-%2$d", i,j));
 					btnVentana[i][j].addMouseListener(new MouseAdapter() {
@@ -261,7 +255,8 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 					time.iniciarTiempo(false);
 				    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon(rutaMina));
 					JOptionPane.showMessageDialog(frame, "  GAME OVER \n", "Fin del juego", JOptionPane.ERROR_MESSAGE);
-					frame.dispose();
+					dispose();
+					//removeAll();
 					reiniciarCasillas();
 					lblCurrentTime.setText("00:00");
 					MenuUsuario.getMenuUsuario().setVisible(true);

@@ -31,7 +31,6 @@ public class SeleccionNivel extends JDialog{
 	private static SeleccionNivel dialog = new SeleccionNivel();
 	private JButton okButton;
 	private JButton cancelButton;
-	private boolean nombreValido;
 	
 
 	/**

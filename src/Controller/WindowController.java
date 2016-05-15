@@ -14,6 +14,8 @@ import View.VentanaBuscaminas;
 
 public class WindowController implements ActionListener{
 	
+	VentanaBuscaminas ventBuscaminas = VentanaBuscaminas.getVentanaBuscaminas();
+	
 	@Override
 	public void actionPerformed(ActionEvent pE) {
 
@@ -49,10 +51,9 @@ public class WindowController implements ActionListener{
 					    "Nombre no valido",
 					    JOptionPane.ERROR_MESSAGE);
 			}
-			else {
-				VentanaBuscaminas ventBuscaminas = VentanaBuscaminas.getVentanaBuscaminas();
-				ventBuscaminas.setNivelElegido(selNivel.getSelectedLevel());
+			else { 
 				ventBuscaminas = VentanaBuscaminas.getVentanaBuscaminas();
+				ventBuscaminas.setNivelElegido(selNivel.getSelectedLevel());
 				ventBuscaminas.inicializar();
 				selNivel.dispose();
 				Usuario user = Usuario.getUsuario();
