@@ -10,6 +10,7 @@ public class Casilla extends Observable{
 	private State estado;
 	private int coordX;
 	private int coordY;
+	private boolean marcadoBandera = false;
 
 	
 	public State getEstado() {
@@ -20,6 +21,17 @@ public class Casilla extends Observable{
 		this.estado = estado;
 	}
 
+	public void marcarBandera(){
+		marcadoBandera = true;
+	}
+	
+	public void desmarcarBandera(){
+		marcadoBandera = false;
+	}
+	
+	public boolean tieneBandera(){
+		return marcadoBandera;
+	}
 	
 	
 //	public Casilla(boolean tieneMina) {
@@ -47,8 +59,6 @@ public class Casilla extends Observable{
 	public Casilla() {
 		
 	}
-	
-	
 	
 	public int getCoordX() {
 		return coordX;
@@ -95,12 +105,11 @@ public class Casilla extends Observable{
 
 		@Override
 		public void botonIzquierdo() {
-			setEstado( new Visible());
-			
-			
-			setChanged();
-			notifyObservers(estado);
-			
+			if(!tieneBandera()){
+				setEstado( new Visible());
+				setChanged();
+				notifyObservers(estado);
+		}
 		}}
 	public class Visible implements State{
 		

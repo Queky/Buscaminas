@@ -45,7 +45,7 @@ public class WindowController implements ActionListener{
 		}
 		else if(pE.getActionCommand().equals("Aceptar")){
 			SeleccionNivel selNivel = SeleccionNivel.getSeleccionNivel();
-			if(selNivel.getNombreJugador().equals("")){
+			if(selNivel.getNombreJugador().contains(" ") || selNivel.getNombreJugador().isEmpty()){
 				JOptionPane.showMessageDialog(selNivel, "Nombre de jugador incorrecto. Por favor, \n"
 														+"introduce un nombre valido.",
 					    "Nombre no valido",

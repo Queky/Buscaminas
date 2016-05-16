@@ -4,8 +4,6 @@ package Model;
 import java.util.Observable;
 import java.util.Observer;
 
-import View.VentanaBuscaminas;
-
 public class CampoCasilla extends Observable implements Observer{
 
 	private Casilla[][] caCasillas;
@@ -58,15 +56,12 @@ public class CampoCasilla extends Observable implements Observer{
 					alto = 25;
 					bombas = ancho * 3;
 				}
-
 			}
-
 		}
-
 		caCasillas = new Casilla[alto][ancho];
 		// bombasTotales = (alto + ancho) / 2;
 		bombasTotales = bombas;
-		banderasTotales = 0;
+		banderasTotales = bombas;
 		rellenarTablero();
 
 	}
@@ -113,18 +108,13 @@ public class CampoCasilla extends Observable implements Observer{
 
 		for (int i = 0; i < caCasillas.length; i++) {
 			for (int j = 0; j < caCasillas[0].length; j++) {
-
 				caCasillas[i][j].setMinasCerca(calcularMinasCerca(i, j));
-
 			}
 		}
-
 	}
 
 	public int calcularMinasCerca(int posx, int posy) {
-
 		int resultado = 0;
-
 		if (!caCasillas[posx][posy].esMina()) {
 			for (int i = Math.max(0, posx - 1); i <= Math.min(posx + 1, caCasillas.length - 1); i++) {
 				for (int j = Math.max(0, posy - 1); j <= Math.min(posy + 1, caCasillas[i].length - 1); j++) {
@@ -138,15 +128,12 @@ public class CampoCasilla extends Observable implements Observer{
 	}
 
 	public void descubrirCasilla(int posx, int posy, boolean derecho, boolean izquierdo) {
-
 		if (derecho) {
 			caCasillas[posx][posy].getEstado().botonDerecho();
 		}
 		if (izquierdo) {
 			caCasillas[posx][posy].getEstado().botonIzquierdo();
-			
 		}
-
 		//System.out.println("descubriendo casilla"+ posx +" "+ posy );
 	}
 
@@ -158,34 +145,52 @@ public class CampoCasilla extends Observable implements Observer{
 
 					if (caCasillas[i][j].esMina() == false) {
 						caCasillas[i][j].getEstado().botonIzquierdo();
-						
 						if (caCasillas[i][j].getMinasCerca() == 0 && !(caCasillas[posx][posy].getEstado() instanceof Casilla.Visible)) {
 							descubrirCasillaExpansion(i, j);
-
 						}
-
 					}
 				}
 			}
-
 		}
-		
-		
 	}
 
-	public void comprobarjuego() {
+	public boolean comprobarjuego() {
 
-		if (bombasTotales == banderasTotales) {
-			System.out.println("Terminaste el juego");
-			System.out.println(user);
+//		if (bombasTotales == banderasTotales) {
+//			System.out.println("Terminaste el juego");
+//			System.out.println(user);
+//		}
+//		if (banderasTotales < bombasTotales) {
+//			System.out.println("demasiadas incognitas");
+//		}
+//		if (banderasTotales > bombasTotales) {
+//			System.out.println("sigue jugando");
+//		}
+		boolean bienMarcadas = false;
+		for (int i = 0; i < caCasillas.length; i++) {
+			for (int j = 0; j < caCasillas[i].length; j++) {
+				if(caCasillas[i][j].esMina()){
+					if(caCasillas[i][j].tieneBandera())
+						bienMarcadas = true;
+					else
+						bienMarcadas = false;
+				}
+			}
 		}
-		if (banderasTotales < bombasTotales) {
-			System.out.println("demasiadas incognitas");
+		return bienMarcadas;
+	}
+	
+	public boolean casillasDescubiertas(){
+		boolean todasDesmarcadas = true;
+		for (int i = 0; i < caCasillas.length && todasDesmarcadas; i++) {
+			for (int j = 0; j < caCasillas[i].length && todasDesmarcadas; j++) {
+				if(caCasillas[i][j].getEstado() instanceof Casilla.Visible && !caCasillas[i][j].esMina())
+					todasDesmarcadas = true;
+				else
+					todasDesmarcadas = false;
+			}
 		}
-		if (banderasTotales > bombasTotales) {
-			System.out.println("sigue jugando");
-		}
-
+		return todasDesmarcadas;
 	}
 
 	public void gameOver() {
@@ -194,7 +199,6 @@ public class CampoCasilla extends Observable implements Observer{
 	}
 
 	public void enseñarTablero() {
-
 		for (int i = 0; i < caCasillas.length; i++) {
 			for (int j = 0; j < caCasillas[0].length; j++) {
 				if (caCasillas[i][j].esMina()) {
@@ -202,28 +206,21 @@ public class CampoCasilla extends Observable implements Observer{
 				} else {
 					System.out.print("0");
 				}
-
 			}
 			System.out.println("");
 		}
-
 		System.out.println("");
-
 		for (int i = 0; i < caCasillas.length; i++) {
 			for (int j = 0; j < caCasillas[0].length; j++) {
 				if (caCasillas[i][j].esMina()) {
 					System.out.print("X");
-
 				} else {
-
 					System.out.print(caCasillas[i][j].getMinasCerca());
 				}
 			}
 			System.out.println("");
 		}
-
 	}
-	
 
 	public Casilla[][] getCampoCasillas() {
 		return caCasillas;
@@ -240,14 +237,18 @@ public class CampoCasilla extends Observable implements Observer{
 	public void setBombasTotales(int bombasTotales) {
 		this.bombasTotales = bombasTotales;
 	}
-
+	
+	/*
 	public int getInterrrogacionesTotales() {
 		return banderasTotales;
 	}
-
+	*/
+	
+	/*
 	public void setInterrrogacionesTotales(int interrrogacionesTotales) {
 		this.banderasTotales = interrrogacionesTotales;
 	}
+	*/
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -266,21 +267,17 @@ public class CampoCasilla extends Observable implements Observer{
 				if (casilla.getMinasCerca() != 0) {
 					System.out.println(casilla.getMinasCerca());
 				}
-
 			}
-
 		}
-
-		if (arg instanceof Casilla.Bandera) {
-
-			banderasTotales++;
-
-		}
-
-		if (arg instanceof Casilla.NoVisible) {
-
+		if (arg instanceof Casilla.Bandera && banderasTotales >= 0) {
 			banderasTotales--;
+			if(banderasTotales > 0)
+				casilla.marcarBandera();
+		}
 
+		if (arg instanceof Casilla.NoVisible && banderasTotales >= -1) {
+			banderasTotales++;
+			casilla.desmarcarBandera();
 		}
 		// Mark for change
 		setChanged();
@@ -296,6 +293,9 @@ public class CampoCasilla extends Observable implements Observer{
 				caCasillas[i][j].reiniciarCasilla(i, j);
 			}
 		}
+		banderasTotales = bombasTotales;
 	}
-
+	public int minasRestantes(){
+		return banderasTotales;
+	}
 }

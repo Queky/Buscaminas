@@ -25,9 +25,7 @@ public class SeleccionNivel extends JDialog{
 	private static final long serialVersionUID = 953446088960038024L;
 	private final JPanel panelDatos = new JPanel();
 	private JTextField textFieldNombre;
-	private static Buscaminas buscaminas = Buscaminas.getBuscaminas();
 	private JComboBox<Object> comboBoxNivel;
-	private String selectedLevel;
 	private static SeleccionNivel dialog = new SeleccionNivel();
 	private JButton okButton;
 	private JButton cancelButton;
