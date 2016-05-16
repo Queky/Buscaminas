@@ -9,7 +9,7 @@ import View.VentanaBuscaminas;
 
 public class ProgramaPrincipal {
 		
-	public static void ProgramaPrincipal() {
+	public static void ejecutarPrograma() {
 
 		// View
 		MenuUsuario mU = MenuUsuario.getMenuUsuario();
@@ -33,6 +33,6 @@ public class ProgramaPrincipal {
 	}
 	
 	public static void main(String[] args) {
-		ProgramaPrincipal();
+		ejecutarPrograma();
 	}
 }

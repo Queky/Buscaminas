@@ -12,18 +12,18 @@ public class Tiempo extends Observable{
 	int min;
 	private String tiempo = "";
 	private boolean reiniciar;
-	private boolean iniciar = false;
+	private boolean iniciar;
+	private boolean stop;
 	
-		
-	private Tiempo() {
+	public Tiempo() {
 		Timer timer = new Timer();
 		
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
-			public void run() {
+			public void run() {			
 				tiempo();
 			}
-		}, 999, 999);
+		}, 0, 999);
 	}
 	
 	public static Tiempo getTiempo(){
@@ -31,7 +31,7 @@ public class Tiempo extends Observable{
 	}
 	
 	private void tiempo() {
-		if(iniciar){
+		if(iniciar && !stop){
 			tiempo = "";
 			if(tiempoTotalSeg == 0 || reiniciar == true){
 				seg = 0;
@@ -61,6 +61,7 @@ public class Tiempo extends Observable{
 	 */
 	public void reiniciar(){
 		reiniciar = true;
+		stop = false;
 	}
 	
 	/*
@@ -74,7 +75,12 @@ public class Tiempo extends Observable{
 		return tiempo;
 	}
 	
-	public void iniciarTiempo(){
-		iniciar = true;
+	public void iniciarTiempo(boolean init){
+		iniciar = init;
+		stop = false;
+	}
+	
+	public void pararTiempo(){
+		stop = true;
 	}
 }

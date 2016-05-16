@@ -32,8 +32,8 @@ public class Usuario extends Observable{
 	public static Usuario getUsuario() {
 		return mUsuario;
 	}
-	//mirar..
-	public void setNombreUsuario(){
+
+	public void nombreUsuario(){
 		 nombre=selNivel.getNombreJugador();
 	}
 	public void setNombre(String pNombre){
@@ -56,8 +56,6 @@ public class Usuario extends Observable{
 		return userLoaded;
 	}
 	
-	
-
 	public int getNivelElegido() {
 		return nivelElegido;
 	}
@@ -78,5 +76,10 @@ public class Usuario extends Observable{
 	public void setNivelElegido(int pNivel){
 		nivelElegido = pNivel;
 		notifyObservers();
+	}
+	
+	public void calcularPuntuacion(){
+		int tiempo = Tiempo.getTiempo().getTiempoSeg();
+		puntuacionMaxima = nivelElegido*10000-tiempo*10;
 	}
 }
