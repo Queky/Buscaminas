@@ -57,6 +57,7 @@ public class WindowController implements ActionListener{
 				ventBuscaminas.inicializar();
 				selNivel.dispose();
 				Usuario user = Usuario.getUsuario();
+				user.nombreUsuario();
 				CampoCasilla tablero = CampoCasilla.getcampoCasillas();
 				tablero.inicializar(selNivel.getSelectedLevel());
 				tablero.rellenarTablero();

@@ -6,7 +6,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import Model.CampoCasilla;
 import Model.Casilla;
+import Model.ConexionBaseDatos;
 import Model.Tiempo;
+import Model.Usuario;
+
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -50,6 +53,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JPanel panelInformacionMinas;
 	private JLabel lblMinasRestantes;
 	private JLabel lblNumMinas;
+	private ConexionBaseDatos conBD = ConexionBaseDatos.getConexion();
 			
 	/**
 	 * Launch the application.
@@ -137,6 +141,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			for(int i=0; i<x; i++){
 				for(int j=0; j<y; j++){
 					btnVentana[i][j] = new JButton();
+					btnVentana[i][j].setFocusable(false);
 					panelCasillas.add(btnVentana[i][j]);
 					btnVentana[i][j].setActionCommand(String.format("%1$d-%2$d", i,j));
 					btnVentana[i][j].addMouseListener(new MouseAdapter() {
@@ -282,13 +287,12 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 				//btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("B");
 				}
 		
-			if(campCasilla.minasRestantes() == 0){
-				if(campCasilla.casillasDescubiertas()){
-					if(campCasilla.comprobarjuego()){
-						time.pararTiempo();
-						JOptionPane.showMessageDialog(frame, "\t Juego completado!\n Tu puntuacion es de:", "Juego completado", JOptionPane.INFORMATION_MESSAGE);				
-					}
-				}
+			if(campCasilla.minasRestantes() == 0 && campCasilla.casillasDescubiertas() && campCasilla.comprobarjuego()){
+				Usuario.getUsuario().calcularPuntuacion();
+				time.pararTiempo();
+				conBD.guardarUsuario();
+				ConexionBaseDatos.getConexion().guardarUsuario();
+				JOptionPane.showMessageDialog(frame, "\t Juego completado!\n Tu puntuacion es de:\n"+Usuario.getUsuario().getPuntuacionMaxima(), "Juego completado", JOptionPane.INFORMATION_MESSAGE);				
 			}
 		}
 	}

@@ -166,28 +166,29 @@ public class CampoCasilla extends Observable implements Observer{
 //		if (banderasTotales > bombasTotales) {
 //			System.out.println("sigue jugando");
 //		}
-		boolean bienMarcadas = false;
-		for (int i = 0; i < caCasillas.length; i++) {
+		boolean minasBienMarcadas = false;
+		for (int i = 0; i < caCasillas.length ; i++) {
 			for (int j = 0; j < caCasillas[i].length; j++) {
 				if(caCasillas[i][j].esMina()){
 					if(caCasillas[i][j].tieneBandera())
-						bienMarcadas = true;
+						minasBienMarcadas = true;
 					else
-						bienMarcadas = false;
+						minasBienMarcadas = false;
 				}
 			}
 		}
-		return bienMarcadas;
+		return minasBienMarcadas;
 	}
 	
 	public boolean casillasDescubiertas(){
-		boolean todasDesmarcadas = true;
-		for (int i = 0; i < caCasillas.length && todasDesmarcadas; i++) {
-			for (int j = 0; j < caCasillas[i].length && todasDesmarcadas; j++) {
-				if(caCasillas[i][j].getEstado() instanceof Casilla.Visible && !caCasillas[i][j].esMina())
+		
+		boolean todasDesmarcadas = false;
+		for (int i = 0; i < caCasillas.length; i++) {
+			for (int j = 0; j < caCasillas[i].length && !caCasillas[i][j].esMina(); j++) {
+				if(caCasillas[i][j].getEstado() instanceof Casilla.Visible)
 					todasDesmarcadas = true;
 				else
-					todasDesmarcadas = false;
+					return false;
 			}
 		}
 		return todasDesmarcadas;
