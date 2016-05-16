@@ -47,6 +47,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private int nivelElegido;
 	private JLabel lblCurrentTime;
 	private Tiempo time = Tiempo.getTiempo();
+<<<<<<< HEAD
 	private CampoCasilla campCasilla = CampoCasilla.getcampoCasillas(); 
 	private String rutaMina;
 	private String rutaBandera;
@@ -55,6 +56,11 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JLabel lblNumMinas;
 	private ConexionBaseDatos conBD = ConexionBaseDatos.getConexion();
 			
+=======
+	private CampoCasilla campCasilla = CampoCasilla.getcampoCasillas();
+	private boolean inicializado= false;
+
+>>>>>>> markel
 	/**
 	 * Launch the application.
 	 */
@@ -166,13 +172,16 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 							System.out.println(pE.toString());
 							System.out.println(command);
 							campCasilla.enseñarTablero();
-							campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
 							
-							//CampoCasilla.getcampoCasillas().enseñarTablero();
-							//CampoCasilla.getcampoCasillas().descubrirCasilla(i, j, derecho, izquierdo);
-							
-				
-						}
+							if (inicializado) {
+								campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
+							} else {
+								inicializado=true;
+								campCasilla.introducirBombas(campCasilla.getBombasTotales(),i,j);
+								campCasilla.calcularMinasCerca();
+					
+								campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
+							}}
 					});
 				}
 			}
@@ -253,6 +262,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		else if(pO.getClass().equals(CampoCasilla.class)){
 			Casilla casilla = (Casilla) pArg;
 			if (casilla.getEstado() instanceof Casilla.Visible) {
+<<<<<<< HEAD
 				if (casilla.esMina() && !casilla.tieneBandera()) {
 					time.pararTiempo();
 					time.iniciarTiempo(false);
@@ -263,6 +273,19 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 					lblCurrentTime.setText("00:00");
 					MenuUsuario.getMenuUsuario().setVisible(true);
 				}else if(!casilla.tieneBandera()){
+=======
+				
+				if (casilla.esMina()) {
+
+				    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon("./Imagenes/mina.jpg"));
+
+							JOptionPane.showMessageDialog(btnVentana[casilla.getCoordX()][casilla.getCoordY()],
+									"  GAME OVER \n",
+								    "Fin del juego",
+								    JOptionPane.ERROR_MESSAGE);						
+				}else{
+					
+>>>>>>> markel
 					if (casilla.getMinasCerca()==0) {
 						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(null);
 						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("");

@@ -20,10 +20,16 @@ public class CampoCasilla extends Observable implements Observer{
 	public CampoCasilla() {
 
 	}
+<<<<<<< HEAD
 	
 	// Rellena el tablero de casillas sin bombas, despues llama a introducir
 	// bombas para rellenarlo y a clacular minas cerca
 	public void rellenarTablero() {
+=======
+
+
+	public void RellenarTablero() {
+>>>>>>> markel
 		for (int i = 0; i < caCasillas.length; i++) {
 			for (int j = 0; j < caCasillas[i].length; j++) {
 				Casilla Casilla01 = new Casilla(false, i, j);
@@ -31,10 +37,6 @@ public class CampoCasilla extends Observable implements Observer{
 				caCasillas[i][j].addObserver(MCAMPOCASILLAS);
 			}
 		}
-
-		introducirBombas(caCasillas.length, caCasillas[0].length, bombasTotales);
-		calcularMinasCerca();
-
 	}
 
 	public void inicializar(int dificultad) {
@@ -66,40 +68,27 @@ public class CampoCasilla extends Observable implements Observer{
 
 	}
 
-	// Rellena el tablero de casillas sin bombas, despues llama a introducir
-	// bombas para rellenarlo y a clacular minas cerca
-//	public void RellenarTablero1() {
-//
-//		for (int i = 0; i < caCasillas.length; i++) {
-//			for (int j = 0; j < caCasillas[i].length; j++) {
-//				Casilla Casilla01 = new Casilla(false);
-//				caCasillas[i][j] = Casilla01;
-//			}
-//		}
-//
-//		introducirBombas(caCasillas.length, caCasillas[0].length, bombasTotales);
-//		calcularMinasCerca();
-//
-//	}
-
 	// introduce bombas en el mapa hasta llenar la cantidad
-	public void introducirBombas(int alto, int ancho, int cantidadBombas) {
+	public void introducirBombas(int cantidadBombas, int x, int y) {
 		int posx = 0;
 		int posy = 0;
 
 		for (int i = 0; i < cantidadBombas; i++) {
 
-			posx = (int) (Math.random() * alto + 0);
-			posy = (int) (Math.random() * ancho + 0);
+			posx = (int) (Math.random() * caCasillas.length + 0);
+			posy = (int) (Math.random() * caCasillas[0].length + 0);
 
 			if (caCasillas[posx][posy].esMina()) {
 				i--;
 			}
-
-			//Casilla casilla01 = new Casilla(true, posx, posy);
-			//caCasillas[posx][posy] = casilla01;
-			caCasillas[posx][posy].setTieneMina(true);
-		}
+			
+			if (!(posx==x && posy==y)) {
+				caCasillas[posx][posy].setTieneMina(true);
+			}
+			if ((posx==x && posy==y)) {
+				i--;
+				}
+}
 
 	}
 
@@ -134,7 +123,10 @@ public class CampoCasilla extends Observable implements Observer{
 		if (izquierdo) {
 			caCasillas[posx][posy].getEstado().botonIzquierdo();
 		}
+<<<<<<< HEAD
 		//System.out.println("descubriendo casilla"+ posx +" "+ posy );
+=======
+>>>>>>> markel
 	}
 
 	public void descubrirCasillaExpansion(int posx, int posy) {
