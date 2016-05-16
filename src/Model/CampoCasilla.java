@@ -63,11 +63,11 @@ public class CampoCasilla extends Observable implements Observer{
 	}
 
 	// introduce bombas en el mapa hasta llenar la cantidad
-	public void introducirBombas(int cantidadBombas, int x, int y) {
+	public void introducirBombas(int x, int y) {
 		int posx = 0;
 		int posy = 0;
 
-		for (int i = 0; i < cantidadBombas; i++) {
+		for (int i = 0; i < bombasTotales; i++) {
 
 			posx = (int) (Math.random() * caCasillas.length + 0);
 			posy = (int) (Math.random() * caCasillas[0].length + 0);

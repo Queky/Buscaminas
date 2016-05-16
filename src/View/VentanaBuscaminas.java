@@ -42,7 +42,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JPanel panelCasillas;
 	private JLabel lblTiempo;
 	private JButton btnReiniciar;
-	private JLabel lblPuntuacin;
+	private JLabel lblPuntuacion;
 	private JButton[][] btnVentana;
 	private int nivelElegido;
 	private JLabel lblCurrentTime;
@@ -143,6 +143,9 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 				for(int j=0; j<y; j++){
 					btnVentana[i][j] = new JButton();
 					btnVentana[i][j].setFocusable(false);
+					btnVentana[i][j].setText("");
+					btnVentana[i][j].setEnabled(true);
+					btnVentana[i][j].setIcon(null);	
 					panelCasillas.add(btnVentana[i][j]);
 					btnVentana[i][j].setActionCommand(String.format("%1$d-%2$d", i,j));
 					btnVentana[i][j].addMouseListener(new MouseAdapter() {
@@ -172,7 +175,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 								campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
 							} else {
 								inicializado=true;
-								campCasilla.introducirBombas(campCasilla.getBombasTotales(),i,j);
+								campCasilla.introducirBombas(i,j);
 								campCasilla.calcularMinasCerca();
 					
 								campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
@@ -213,9 +216,9 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 					if(btnReiniciar.isEnabled()){
 						time.reiniciar();
 						reiniciarCasillas();
-						campCasilla.rellenarTablero();
-						campCasilla.reiniciarCasillas();
+						inicializado = false;
 						lblNumMinas.setText(""+campCasilla.minasRestantes());
+						campCasilla.reiniciarCasillas();
 					}
 				}
 			});
@@ -223,10 +226,10 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		return btnReiniciar;
 	}
 	private JLabel getLblPuntuacin() {
-		if (lblPuntuacin == null) {
-			lblPuntuacin = new JLabel("Puntuación:");
+		if (lblPuntuacion == null) {
+			lblPuntuacion = new JLabel("Puntuación:");
 		}
-		return lblPuntuacin;
+		return lblPuntuacion;
 	}
 	
 	public void setNivelElegido(int pNivel){
@@ -261,18 +264,12 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 					time.pararTiempo();
 					time.iniciarTiempo(false);
 				    btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon(rutaMina));
-					JOptionPane.showMessageDialog(frame, "  GAME OVER \n", "Fin del juego", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "GAME OVER \n", "Fin del juego", JOptionPane.ERROR_MESSAGE);
 					setVisible(false);
+					inicializado = false;
 					reiniciarCasillas();
 					lblCurrentTime.setText("00:00");
-					MenuUsuario.getMenuUsuario().setVisible(true);
-				}else if(!casilla.tieneBandera()){				
-					if (casilla.esMina()) {
-						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon("./Imagenes/mina.jpg"));
-						JOptionPane.showMessageDialog(btnVentana[casilla.getCoordX()][casilla.getCoordY()],
-									"GAME OVER \n",
-								    "Fin del juego",
-								    JOptionPane.ERROR_MESSAGE);						
+					MenuUsuario.getMenuUsuario().setVisible(true);					
 				}else{
 					if (casilla.getMinasCerca()==0) {
 						btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(null);
@@ -302,11 +299,10 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			if(campCasilla.minasRestantes() == 0 && campCasilla.casillasDescubiertas() && campCasilla.comprobarjuego()){
 				Usuario.getUsuario().calcularPuntuacion();
 				time.pararTiempo();
-				conBD.guardarUsuario();
-				ConexionBaseDatos.getConexion().guardarUsuario();
+				ConexionBaseDatos.getConexion();
+				ConexionBaseDatos.guardarUsuario();
 				JOptionPane.showMessageDialog(frame, "\t Juego completado!\n Tu puntuacion es de:\n"+Usuario.getUsuario().getPuntuacionMaxima(), "Juego completado", JOptionPane.INFORMATION_MESSAGE);				
 			}
-		}
 	}
 	private JPanel getPanelInformacionMinas() {
 		if (panelInformacionMinas == null) {
