@@ -20,16 +20,10 @@ public class CampoCasilla extends Observable implements Observer{
 	public CampoCasilla() {
 
 	}
-<<<<<<< HEAD
 	
 	// Rellena el tablero de casillas sin bombas, despues llama a introducir
 	// bombas para rellenarlo y a clacular minas cerca
 	public void rellenarTablero() {
-=======
-
-
-	public void RellenarTablero() {
->>>>>>> markel
 		for (int i = 0; i < caCasillas.length; i++) {
 			for (int j = 0; j < caCasillas[i].length; j++) {
 				Casilla Casilla01 = new Casilla(false, i, j);
@@ -123,10 +117,6 @@ public class CampoCasilla extends Observable implements Observer{
 		if (izquierdo) {
 			caCasillas[posx][posy].getEstado().botonIzquierdo();
 		}
-<<<<<<< HEAD
-		//System.out.println("descubriendo casilla"+ posx +" "+ posy );
-=======
->>>>>>> markel
 	}
 
 	public void descubrirCasillaExpansion(int posx, int posy) {
