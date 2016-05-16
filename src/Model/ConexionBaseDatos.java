@@ -2,6 +2,7 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class ConexionBaseDatos {
@@ -20,7 +21,7 @@ public class ConexionBaseDatos {
 						 + " ('"+u.getNombre()+"', "+u.getPuntuacionMaxima()+", "+u.getNivelElegido()+")";
 			System.out.println(sql);
 			st = con.createStatement();
-			st.execute("insert into usuarios (nombre, puntuacion, dificultad) values ('inaki2', 2500, 3)");
+			st.executeUpdate("insert into usuarios (nombre, puntuacion, dificultad) values ('inaki2', '2500', '3')");	
 			st.close();
 			con.close();
 		} catch ( Exception e ) {
