@@ -15,7 +15,7 @@ public class ProgramaPrincipal {
 		ConexionBaseDatos conBD = ConexionBaseDatos.getConexion();
 		conBD.obtenerPuntuaciones();
 		
-		// View
+		// view
 		MenuUsuario mU = MenuUsuario.getMenuUsuario();
 		SeleccionNivel sN = SeleccionNivel.getSeleccionNivel();
 		VentanaBuscaminas.getVentanaBuscaminas();
@@ -25,7 +25,7 @@ public class ProgramaPrincipal {
 		CampoCasilla.getcampoCasillas();
 		
 		
-		// Controller
+		// controller
 		WindowController wC = new WindowController();
 				
 		// Add controllers
