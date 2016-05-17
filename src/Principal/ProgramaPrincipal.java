@@ -1,32 +1,38 @@
-package Principal;
+package principal;
 
-import Controller.WindowController;
-import Model.CampoCasilla;
-import Model.Usuario;
-import View.MenuUsuario;
-import View.SeleccionNivel;
-import View.VentanaBuscaminas;
-
+import controller.WindowController;
+import model.CampoCasilla;
+import model.ConexionBaseDatos;
+import model.Usuario;
+import view.MenuUsuario;
+import view.Puntuaciones;
+import view.SeleccionNivel;
+import view.VentanaBuscaminas;
 public class ProgramaPrincipal {
 		
 	public static void ejecutarPrograma() {
 
+		ConexionBaseDatos conBD = ConexionBaseDatos.getConexion();
+		conBD.obtenerPuntuaciones();
+		
 		// View
 		MenuUsuario mU = MenuUsuario.getMenuUsuario();
 		SeleccionNivel sN = SeleccionNivel.getSeleccionNivel();
-		VentanaBuscaminas vN = VentanaBuscaminas.getVentanaBuscaminas();
+		VentanaBuscaminas.getVentanaBuscaminas();
+		Puntuaciones punt = Puntuaciones.getVentanaPuntuaciones();
 		
-		// Model
-		Usuario u = Usuario.getUsuario();
-		CampoCasilla cc = CampoCasilla.getcampoCasillas();
+		Usuario.getUsuario();
+		CampoCasilla.getcampoCasillas();
 		
 		
 		// Controller
 		WindowController wC = new WindowController();
 				
 		// Add controllers
+
 		mU.addController(wC);
 		sN.addController(wC);
+		punt.addController(wC);		
 		
 		// Add observers
 		//CampoCasilla.addObserver();

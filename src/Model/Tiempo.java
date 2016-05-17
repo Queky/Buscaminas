@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.Observable;
 import java.util.Timer;
@@ -45,11 +45,8 @@ public class Tiempo extends Observable{
 				min++;
 			}
 			tiempo = String.format("%1$02d:%2$02d", min, seg);
-			// Mark value as changed
 			setChanged();
-			// Notify observer class
 			notifyObservers(tiempo);
-			//System.out.println(String.format("%1$02d:%2$02d", min, seg));
 			seg++;
 			tiempoTotalSeg++;
 		}

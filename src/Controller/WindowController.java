@@ -1,25 +1,25 @@
-package Controller;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JOptionPane;
 
-import Model.CampoCasilla;
-import Model.Tiempo;
-import Model.Usuario;
-import View.MenuUsuario;
-import View.SeleccionNivel;
-import View.VentanaBuscaminas;
+import model.CampoCasilla;
+import model.Tiempo;
+import model.Usuario;
+import view.MenuUsuario;
+import view.Puntuaciones;
+import view.SeleccionNivel;
+import view.VentanaBuscaminas;
 
 public class WindowController implements ActionListener{
 	
-	VentanaBuscaminas ventBuscaminas = VentanaBuscaminas.getVentanaBuscaminas();
+	private VentanaBuscaminas ventBuscaminas = VentanaBuscaminas.getVentanaBuscaminas();
+	private MenuUsuario menu = MenuUsuario.getMenuUsuario();
+	private Puntuaciones punt = Puntuaciones.getVentanaPuntuaciones();
 	
 	@Override
 	public void actionPerformed(ActionEvent pE) {
-
-		MenuUsuario menu = MenuUsuario.getMenuUsuario();
 		
 		if(pE.getActionCommand().equals("Ayuda")){
 			JOptionPane.showMessageDialog(menu, "1. El juego consiste en despejar todas las casillas \n"
@@ -38,6 +38,15 @@ public class WindowController implements ActionListener{
 			menu.setVisible(false);
 			SeleccionNivel selNivel = SeleccionNivel.getSeleccionNivel();
 			selNivel.setVisible(true);
+		}
+		else if(pE.getActionCommand().equals("Puntuaciones")){
+			punt.actualizarVariables();
+			menu.setVisible(false);
+			punt.setVisible(true);
+		}
+		else if(pE.getActionCommand().equals("Volver")){
+			punt.setVisible(false);
+			menu.setVisible(true);
 		}
 		else if(pE.getActionCommand().equals("Salir")){
 			menu.dispose();

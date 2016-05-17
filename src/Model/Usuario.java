@@ -1,25 +1,19 @@
-package Model;
+package model;
 
 import java.util.Observable;
 
-import View.SeleccionNivel;
+import view.SeleccionNivel;
 
 public class Usuario extends Observable{
 	
-	
 	private static Usuario mUsuario = new Usuario();
-
 	private String nombre;
 	private int puntuacionMaxima;
 	private CampoCasilla ultimoTablero;
 	private boolean userLoaded;
 	private int nivelElegido;
+	private SeleccionNivel selNivel = SeleccionNivel.getSeleccionNivel();
 	
-	SeleccionNivel selNivel = SeleccionNivel.getSeleccionNivel();
-	
-	// Tiempo del usuario.
-	int seg;
-		
 	private Usuario() {
 
 	}
@@ -79,6 +73,8 @@ public class Usuario extends Observable{
 	
 	public void calcularPuntuacion(){
 		int tiempo = Tiempo.getTiempo().getTiempoSeg();
-		puntuacionMaxima = nivelElegido*10000-tiempo*10;
+		puntuacionMaxima = nivelElegido*5000-tiempo*10;
+		if (puntuacionMaxima < 0)
+			puntuacionMaxima = 0;
 	}
 }

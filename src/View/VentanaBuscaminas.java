@@ -1,14 +1,15 @@
-package View;
+package view;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import Model.CampoCasilla;
-import Model.Casilla;
-import Model.ConexionBaseDatos;
-import Model.Tiempo;
-import Model.Usuario;
+
+import model.CampoCasilla;
+import model.Casilla;
+import model.ConexionBaseDatos;
+import model.Tiempo;
+import model.Usuario;
 
 import java.awt.Dimension;
 import javax.swing.JLabel;
@@ -55,14 +56,7 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JLabel lblNumMinas;
 	private ConexionBaseDatos conBD = ConexionBaseDatos.getConexion();	
 	private boolean inicializado= false;
-
-	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the frame.
-	 */
+	
 	private VentanaBuscaminas() {
 		//initialize();
 	}
@@ -94,8 +88,6 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		time.iniciarTiempo(true);
-		//pack();
-		//setVisible(true);	
 	}
 
 	private JPanel getPanelInformacion() {
@@ -131,60 +123,54 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		return panelInformacion;
 	}
 	private JPanel getPanelCasillas() {
-		//Se hace esto para redimensionar la pantalla cuando ya existe un panel casillas,
-		//y cambiamos de nivel.
-		if (panelCasillas == null || panelCasillas != null) {
-			panelCasillas = new JPanel();
-			int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 3;
-			int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 3;
-			panelCasillas.setLayout(new GridLayout(x, y, 0, 0));
-			btnVentana = new JButton[x][y];
-			for(int i=0; i<x; i++){
-				for(int j=0; j<y; j++){
-					btnVentana[i][j] = new JButton();
-					btnVentana[i][j].setFocusable(false);
-					btnVentana[i][j].setText("");
-					btnVentana[i][j].setEnabled(true);
-					btnVentana[i][j].setIcon(null);	
-					panelCasillas.add(btnVentana[i][j]);
-					btnVentana[i][j].setActionCommand(String.format("%1$d-%2$d", i,j));
-					btnVentana[i][j].addMouseListener(new MouseAdapter() {
 
-						@Override
-						public void mouseClicked(MouseEvent pE) {
-							String command = ((JButton) pE.getComponent()).getActionCommand();
-							Scanner proc = new Scanner(command);
-							proc.useDelimiter("-");
-							int i = proc.nextInt();
-							int j = proc.nextInt();
-							
-							System.out.println(i + " " + j);
-							boolean izquierdo = false;
-							boolean derecho =false;
-							if (SwingUtilities.isLeftMouseButton(pE)) {
-								izquierdo=true;
-							}
-							else{
-								derecho=true;
-							}
-							System.out.println(pE.toString());
-							System.out.println(command);
-							campCasilla.enseñarTablero();
-							
-							if (inicializado) {
-								campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
-							} else {
-								inicializado=true;
-								campCasilla.introducirBombas(i,j);
-								campCasilla.calcularMinasCerca();
-					
-								campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
-							}}
-					});
-				}
+		panelCasillas = new JPanel();
+		int x = (nivelElegido == 1) ? 10 : (nivelElegido == 2) ? 15 : (nivelElegido == 3) ? 25 : 3;
+		int y = (nivelElegido == 1) ? 7 : (nivelElegido == 2) ? 10 : (nivelElegido == 3) ? 12 : 3;
+		panelCasillas.setLayout(new GridLayout(x, y, 0, 0));
+		btnVentana = new JButton[x][y];
+		for(int i=0; i<x; i++){
+			for(int j=0; j<y; j++){
+				btnVentana[i][j] = new JButton();
+				btnVentana[i][j].setFocusable(false);
+				btnVentana[i][j].setText("");
+				btnVentana[i][j].setEnabled(true);
+				btnVentana[i][j].setIcon(null);	
+				panelCasillas.add(btnVentana[i][j]);
+				btnVentana[i][j].setActionCommand(String.format("%1$d-%2$d", i,j));
+				btnVentana[i][j].addMouseListener(new MouseAdapter() {
+
+					@SuppressWarnings("resource")
+					@Override
+					public void mouseClicked(MouseEvent pE) {
+						String command = ((JButton) pE.getComponent()).getActionCommand();
+						Scanner proc = new Scanner(command);
+						proc.useDelimiter("-");
+						int i = proc.nextInt();
+						int j = proc.nextInt();
+						
+						boolean izquierdo = false;
+						boolean derecho =false;
+						if (SwingUtilities.isLeftMouseButton(pE)) {
+							izquierdo=true;
+						}
+						else{
+							derecho=true;
+						}
+						
+						if (inicializado) {
+							campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
+						} else {
+							inicializado=true;
+							campCasilla.introducirBombas(i,j);
+							campCasilla.calcularMinasCerca();
+				
+							campCasilla.descubrirCasilla(i, j, derecho, izquierdo);
+						}}
+				});
 			}
 		}
-		return panelCasillas;
+	return panelCasillas;
 	}
 	
 	private void reiniciarCasillas(){
@@ -238,7 +224,6 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 		rutaBandera = "./Imagenes/bandera";
 		rutaMina += (pNivel == 1) ? "Nivel1.png" : "Nivel2.png";
 		rutaBandera += (pNivel == 1) ? "Nivel1.png" : "Nivel2.png";
-		System.out.println("entra y nivel "+pNivel);
 	}
 
 	private JLabel getLblCurrentTime() {
@@ -250,7 +235,6 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 
 	@Override
 	public void update(Observable pO, Object pArg) {
-		boolean banderaConCera = false;
 		
 		if(campCasilla.minasRestantes() >= 0)
 			lblNumMinas.setText(""+campCasilla.minasRestantes());
@@ -292,16 +276,18 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			else if (casilla.getEstado() instanceof Casilla.Bandera && campCasilla.minasRestantes() >= 0) {
 				casilla.marcarBandera();
 				btnVentana[casilla.getCoordX()][casilla.getCoordY()].setIcon(new ImageIcon(rutaBandera));
-				//btnVentana[casilla.getCoordX()][casilla.getCoordY()].setText("B");
 				}
 			}
 			
-			if(campCasilla.minasRestantes() == 0 && campCasilla.casillasDescubiertas() && campCasilla.comprobarjuego()){
+			if(campCasilla.minasRestantes() == 0 && campCasilla.casillasDescubiertas() && campCasilla.comprobarjuego() && inicializado){
 				Usuario.getUsuario().calcularPuntuacion();
 				time.pararTiempo();
-				ConexionBaseDatos.getConexion();
-				ConexionBaseDatos.guardarUsuario();
-				JOptionPane.showMessageDialog(frame, "\t Juego completado!\n Tu puntuacion es de:\n"+Usuario.getUsuario().getPuntuacionMaxima(), "Juego completado", JOptionPane.INFORMATION_MESSAGE);				
+				conBD.guardarUsuario();
+				JOptionPane.showMessageDialog(frame, "\t Juego completado!\n Tu puntuacion es de:\n"+Usuario.getUsuario().getPuntuacionMaxima(), "Juego completado", JOptionPane.INFORMATION_MESSAGE);
+				setVisible(false);
+				inicializado = false;
+				reiniciarCasillas();
+				MenuUsuario.getMenuUsuario().setVisible(true);
 			}
 	}
 	private JPanel getPanelInformacionMinas() {

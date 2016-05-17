@@ -1,5 +1,5 @@
 
-package Model;
+package model;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -10,9 +10,7 @@ public class CampoCasilla extends Observable implements Observer{
 	private int bombasTotales;
 	private int banderasTotales;
 	private static CampoCasilla MCAMPOCASILLAS = new CampoCasilla();
-	private Usuario user;
 	
-
 	public static CampoCasilla getcampoCasillas(){
 		return MCAMPOCASILLAS;
 	}
@@ -137,17 +135,6 @@ public class CampoCasilla extends Observable implements Observer{
 	}
 
 	public boolean comprobarjuego() {
-
-//		if (bombasTotales == banderasTotales) {
-//			System.out.println("Terminaste el juego");
-//			System.out.println(user);
-//		}
-//		if (banderasTotales < bombasTotales) {
-//			System.out.println("demasiadas incognitas");
-//		}
-//		if (banderasTotales > bombasTotales) {
-//			System.out.println("sigue jugando");
-//		}
 		boolean minasBienMarcadas = false;
 		for (int i = 0; i < caCasillas.length ; i++) {
 			for (int j = 0; j < caCasillas[i].length; j++) {
@@ -176,35 +163,6 @@ public class CampoCasilla extends Observable implements Observer{
 		return todasDesmarcadas;
 	}
 
-	public void gameOver() {
-
-		System.out.println("GAME OVER NOOB");
-	}
-
-	public void enseñarTablero() {
-		for (int i = 0; i < caCasillas.length; i++) {
-			for (int j = 0; j < caCasillas[0].length; j++) {
-				if (caCasillas[i][j].esMina()) {
-					System.out.print("X");
-				} else {
-					System.out.print("0");
-				}
-			}
-			System.out.println("");
-		}
-		System.out.println("");
-		for (int i = 0; i < caCasillas.length; i++) {
-			for (int j = 0; j < caCasillas[0].length; j++) {
-				if (caCasillas[i][j].esMina()) {
-					System.out.print("X");
-				} else {
-					System.out.print(caCasillas[i][j].getMinasCerca());
-				}
-			}
-			System.out.println("");
-		}
-	}
-
 	public Casilla[][] getCampoCasillas() {
 		return caCasillas;
 	}
@@ -220,35 +178,14 @@ public class CampoCasilla extends Observable implements Observer{
 	public void setBombasTotales(int bombasTotales) {
 		this.bombasTotales = bombasTotales;
 	}
-	
-	/*
-	public int getInterrrogacionesTotales() {
-		return banderasTotales;
-	}
-	*/
-	
-	/*
-	public void setInterrrogacionesTotales(int interrrogacionesTotales) {
-		this.banderasTotales = interrrogacionesTotales;
-	}
-	*/
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("entra update");
 		Casilla casilla = (Casilla) o;
-		//VentanaBuscaminas ventBuscaminas = VentanaBuscaminas.getVentanaBuscaminas();
 		if (arg instanceof Casilla.Visible) {
-			if (casilla.esMina()) {
-				gameOver();
-				System.out.println("game over");
-			}
 			if (!casilla.esMina()) {
 				if (casilla.getMinasCerca() == 0) {
 					descubrirCasillaExpansion(casilla.getCoordX(), casilla.getCoordY());
-				}
-				if (casilla.getMinasCerca() != 0) {
-					System.out.println(casilla.getMinasCerca());
 				}
 			}
 		}
@@ -262,9 +199,7 @@ public class CampoCasilla extends Observable implements Observer{
 			banderasTotales++;
 			casilla.desmarcarBandera();
 		}
-		// Mark for change
 		setChanged();
-		//Notify observer class
 		notifyObservers(casilla);
 		comprobarjuego();
 

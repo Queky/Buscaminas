@@ -1,5 +1,5 @@
 
-package Model;
+package model;
 
 import java.util.Observable;
 
@@ -33,23 +33,11 @@ public class Casilla extends Observable{
 		return marcadoBandera;
 	}
 	
-	
-//	public Casilla(boolean tieneMina) {
-//	
-//		this.tieneMina = tieneMina;
-//	
-//		estado = new NoVisible();
-//	
-//	}
-	
 	public Casilla(boolean tieneMina, int i, int j) {
-		
 		this.tieneMina = tieneMina;
 		this.coordX=i;
 		this.coordY=j;
-	
 		estado = new NoVisible();
-	
 	}
 	
 	public int CalcularMinasCerca(){

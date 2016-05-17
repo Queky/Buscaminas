@@ -1,4 +1,4 @@
-package View;
+package view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
@@ -6,11 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
-import Controller.Buscaminas;
-import Model.Tiempo;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -29,19 +26,6 @@ public class SeleccionNivel extends JDialog{
 	private static SeleccionNivel dialog = new SeleccionNivel();
 	private JButton okButton;
 	private JButton cancelButton;
-	
-
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			dialog.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 	
 	public static SeleccionNivel getSeleccionNivel(){
 		return dialog;

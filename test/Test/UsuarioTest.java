@@ -1,4 +1,4 @@
-package Test;
+package test;
 
 
 
@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Model.Usuario;
+import model.Usuario;
 
 public class UsuarioTest {
 	Usuario S = new Usuario("Raul");
