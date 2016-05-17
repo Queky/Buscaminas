@@ -16,52 +16,52 @@ public class CasillaTest {
 		S = new Casilla();
 		D = new Casilla();
 	}
-	/*@Test
+	/*@test
 	public void testCasillaBoolean() {
 		
 	}*/
 
-	/*@Test
+	/*@test
 	public void testCalcularMinasCerca() {
 		fail("Not yet implemented");
 	}*/
 
-	/*@Test
+	/*@test
 	public void testCasilla() {
 		fail("Not yet implemented");
 	}*/
 
 	
 	/** Hay que arreglarlo, metodos nuevos
-	@Test
+	@test
 	public void testIsVisible() {
 		
 		assertFalse(S.isVisible());
 	}
 
-	@Test
+	@test
 	public void testSetVisible() {
 		S.setVisible(false);
 		
 	}
 
-	@Test
+	@test
 	public void testIsInterrogacion() {
 		assertFalse(S.isInterrogacion());
 	}
 
-	@Test
+	@test
 	public void testSetInterrogacion() {
 		S.setInterrogacion(false);
 	}
 
-	@Test
+	@test
 	public void testEsMina() {
 		
 		assertFalse(S.esMina());
 	}
 
-	/*@Test
+	/*@test
 	public void testSetTieneMina() {
 		S.setTieneMina(true);
 		D.setTieneMina(true);
@@ -69,12 +69,12 @@ public class CasillaTest {
 	}*/
 	
 
-	/*@Test
+	/*@test
 	public void testGetMinasCerca() {
 		fail("Not yet implemented");
 	}*/
 
-	/*@Test
+	/*@test
 	public void testSetMinasCerca() {
 		fail("Not yet implemented");
 	}*/

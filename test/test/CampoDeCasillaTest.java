@@ -29,12 +29,12 @@ public class CampoDeCasillaTest {
 //		
 //		
 //	}
-//	@Test
+//	@test
 //	public void testCampoDeCasillasString() {
 //		assertNotNull(new CampoDeCasillas("facil"));
 //	}
 //
-//	@Test
+//	@test
 //	public void testRellenarTablero() {
 //		S.rellenarTablero();
 //		assertNotNull(S);
@@ -45,7 +45,7 @@ public class CampoDeCasillaTest {
 //		
 //	}
 //
-//	@Test
+//	@test
 //	public void testCampoDeCasillasIntInt() {
 //		assertNotNull(new CampoDeCasillas(5,5));
 //		
