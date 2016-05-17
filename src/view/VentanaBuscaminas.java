@@ -43,7 +43,6 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 	private JPanel panelCasillas;
 	private JLabel lblTiempo;
 	private JButton btnReiniciar;
-	private JLabel lblPuntuacion;
 	private JButton[][] btnVentana;
 	private int nivelElegido;
 	private JLabel lblCurrentTime;
@@ -102,10 +101,8 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(getLblCurrentTime())
 						.addGap(31)
-						.addComponent(getBtnReiniciar(), GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(getLblPuntuacin())
-						.addGap(35))
+						.addComponent(getBtnReiniciar(), GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+						.addGap(102))
 			);
 			gl_panelInformacion.setVerticalGroup(
 				gl_panelInformacion.createParallelGroup(Alignment.LEADING)
@@ -114,9 +111,8 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 						.addGroup(gl_panelInformacion.createParallelGroup(Alignment.BASELINE)
 							.addComponent(getLblTiempo())
 							.addComponent(getLblCurrentTime())
-							.addComponent(getLblPuntuacin())
 							.addComponent(getBtnReiniciar()))
-						.addContainerGap(9, Short.MAX_VALUE))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 			);
 			panelInformacion.setLayout(gl_panelInformacion);
 		}
@@ -201,8 +197,8 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 				public void actionPerformed(ActionEvent pE) {
 					if(btnReiniciar.isEnabled()){
 						time.reiniciar();
-						reiniciarCasillas();
 						inicializado = false;
+						reiniciarCasillas();
 						lblNumMinas.setText(""+campCasilla.minasRestantes());
 						campCasilla.reiniciarCasillas();
 					}
@@ -210,12 +206,6 @@ public class VentanaBuscaminas extends JFrame implements Observer{
 			});
 		}
 		return btnReiniciar;
-	}
-	private JLabel getLblPuntuacin() {
-		if (lblPuntuacion == null) {
-			lblPuntuacion = new JLabel("Puntuación:");
-		}
-		return lblPuntuacion;
 	}
 	
 	public void setNivelElegido(int pNivel){
