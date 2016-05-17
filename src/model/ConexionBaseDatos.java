@@ -18,11 +18,11 @@ public class ConexionBaseDatos{
 		Usuario u = Usuario.getUsuario();
 		try {
 			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:./BaseDatos/buscaminas.db");
+			con = DriverManager.getConnection("jdbc:sqlite:./buscaminas.db");
 			String sql = "insert into usuarios (nombre, puntuacion, dificultad) values"
-						 + " ('"+u.getNombre()+"', "+u.getPuntuacionMaxima()+", "+u.getNivelElegido()+")";
+						 + "('"+u.getNombre()+"', "+u.getPuntuacionMaxima()+", "+u.getNivelElegido()+")";
 			st = con.createStatement();
-			st.executeUpdate(sql);	
+			st.executeUpdate(sql);
 			st.close();
 			con.close();
 		} catch ( Exception e ) {
@@ -41,7 +41,7 @@ public class ConexionBaseDatos{
 		Usuario.getUsuario();
 		try {
 			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:./BaseDatos/buscaminas.db");
+			con = DriverManager.getConnection("jdbc:sqlite:./buscaminas.db");
 			String sqlNivel1 = "select nombre, puntuacion from usuarios where dificultad = 1 order by puntuacion desc limit 10";
 			st = con.createStatement();
 			ResultSet rs = st.executeQuery(sqlNivel1);
